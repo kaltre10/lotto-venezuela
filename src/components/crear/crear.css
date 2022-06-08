@@ -1,0 +1,29 @@
+.crear .container{
+    display: flex;
+    justify-content: center;
+}
+
+.crear .form{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px 0;
+}
+
+.crear .input{
+    padding: 10px;
+}
+
+.crear .list{
+    width: 400px;
+}
+
+.crear .list-item{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.crear .delete{
+    cursor: pointer;
+}

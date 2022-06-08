@@ -1,0 +1,16 @@
+.reportes .container{
+    display: flex;
+    flex-direction: column;
+}
+
+.reportes .table{
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.ticket-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
