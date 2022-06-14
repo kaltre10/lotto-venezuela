@@ -24,7 +24,6 @@ const Vender = () => {
                 }
                 setDataContext({ user: { id: user.id, level: user.level}});
                 if(user.level == 1) {
-                    console.log(user)
                     navigate('/ventas');
                 }
             }
