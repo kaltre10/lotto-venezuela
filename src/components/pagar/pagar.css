@@ -1,0 +1,15 @@
+.pagar{
+
+}
+
+.pagar .ticket{
+    background-color: #34495e;
+    padding: 20px;
+    border-radius: 25px;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 40px;
+}

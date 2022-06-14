@@ -1,14 +1,35 @@
 import './vender.css';
-import {useState, useContext} from 'react';
+import {useState, useContext, useEffect } from 'react';
 import { UserContex } from '../../context/DataUserContext';
-import Menu from '../menu/Menu';
+import useGetUser from '../../hooks/useGetUser';
+import { useNavigate } from "react-router-dom";
+import api from '../../services/api';
 import Card from '../card/Card';
+import Menu from '../menu/Menu';
 
 const Vender = () => {
 
+    let navigate = useNavigate();
     const [ticket, setTicket] = useState([]);
     const [modal, setModal] = useState({message : '', status: false});
-    const {dataContext} = useContext(UserContex);
+    const {dataContext, setDataContext} = useContext(UserContex);
+    const URL = import.meta.env.VITE_APP_URL;
+
+    useEffect(() => {
+        (async () => {
+            if(!dataContext.user.id){
+                let user = await useGetUser();  
+                if(!user.id){
+                    navigate('/login');
+                }
+                setDataContext({ user: { id: user.id, level: user.level}});
+                if(user.level == 1) {
+                    console.log(user)
+                    navigate('/ventas');
+                }
+            }
+        })();
+    }, []);
 
     const animal = [
         { number: 1, name: "name", url: "" },
@@ -61,19 +82,12 @@ const Vender = () => {
     const handleClick = async () => {
 
         const data = {
-            user: dataContext.user.id,
+            token: localStorage.getItem('lotto').replaceAll('"', ''),
             numbers: ticket.map( t => t.number).flat()
         }
-
-        const query = await fetch('http://localhost:5000/api/v1/ventas', {
-            method: 'POST',
-            headers: {
-                'Content-Type': "application/json"
-            },
-            body: JSON.stringify({ticket:data})
-        });
-
+        const query = await api(`${URL}/api/v1/ventas`, {ticket:data}, 'POST')
         const response = await query.json();
+        // console.log(response)
         if(query.status == 200){
             setTicket([])
             setModal({message:"Ticket Guardado", status: true})

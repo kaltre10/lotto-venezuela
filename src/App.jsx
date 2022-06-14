@@ -8,6 +8,7 @@ import Reportes from './components/reportes/Reportes';
 import Ventas from './components/ventas/Ventas';
 import Crear from './components/crear/Crear';
 import CargarResultados from './components/cargarResultados/CargarResultados';
+import Pagar from './components/pagar/Pagar';
 import { DataUserContext } from './context/DataUserContext';
 import { Routes, Route } from "react-router-dom";
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/ventas" element={<Ventas/>} />
           <Route path="/crear" element={<Crear/>} />
           <Route path="/resultados-crear" element={<CargarResultados/>} />
+          <Route path="/pagar" element={<Pagar/>} />
           <Route path="/login" element={<Login/>} />
         </Routes>
       </DataUserContext>

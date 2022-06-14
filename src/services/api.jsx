@@ -1,5 +1,5 @@
-const api = (data, method) => {
-    return fetch('http://localhost:5000/api/v1/auth/login', {
+const api = (url, data, method) => {
+    return fetch(url, {
         method,
         headers: {
             'Content-Type': "application/json"

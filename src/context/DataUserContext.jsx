@@ -1,12 +1,26 @@
-import { useContext, createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import useGetUser from '../hooks/useGetUser';
+import { useNavigate } from "react-router-dom";
 
-export const UserContex = createContext();
+const UserContex = createContext();
 
-export const DataUserContext = props => {
+const DataUserContext = props => {
 
-    const [ dataContext, setDataContext ] = useState({
-        user: {id: "", level: 0}
-    })    
+    let navigate = useNavigate();
+    const [ dataContext, setDataContext ] = useState({ user: { id: null, level: 0 }});
+      
+    
+    useEffect(() => {
+        (async () => {
+            if(!dataContext.user.id){
+                let user = await useGetUser();  
+                setDataContext({ user: { id: user.id, level: user.level}})
+            }else{
+                navigate('login');
+            }
+        })();
+    }, []);
+
     
     return(
         <UserContex.Provider
@@ -20,4 +34,4 @@ export const DataUserContext = props => {
     )
 }
 
-export default { UserContex, DataUserContext }
+export { UserContex, DataUserContext }

@@ -6,16 +6,18 @@ import './menu.css';
 
 const Menu = () => {
 
-    const {dataContext} = useContext(UserContex);
+    const {dataContext, setDataContext} = useContext(UserContex);
 
     let navigate = useNavigate();
 
     const handleClose = () => {
+        setDataContext({ user: {id: null, level: 0}})
+        localStorage.removeItem('lotto')
         navigate('/login');
     }
 
     return ( 
-    
+       
         dataContext.user.level == 1
         ?(
             <nav className='menu'>
@@ -23,8 +25,7 @@ const Menu = () => {
                     <li><NavLink to='/ventas'>Ventas</NavLink></li>
                     <li><NavLink to='/crear'>Crear Vendedor</NavLink></li>
                     <li><NavLink to='/resultados-crear'>Resultados</NavLink></li>
-                    <li><NavLink to='/pagar'>Pagar</NavLink></li>
-                    <li><NavLink to='/anular'>Anular</NavLink></li>
+                    <li><NavLink to='/pagar'>Pagar/Anular</NavLink></li>
                     <li><a href='#' onClick={() => handleClose()}>Cerrar</a></li>
                 </ul>
             </nav> 

@@ -1,16 +1,15 @@
-import {useState, useContext} from 'react';
+import {useState} from 'react';
+import api from '../../services/api';
 import { useNavigate } from "react-router-dom";
-import { UserContex } from "../../context/DataUserContext";
 import './login.css';
 
 const Login = () => {
 
     let navigate = useNavigate();
-
-    const { setDataContext } = useContext(UserContex); 
+    const URL = import.meta.env.VITE_APP_URL;
 
     const [data, setData] = useState({
-        name: '',
+        user: '',
         pass: ''
     })
     const [invalid, setInvalid] = useState(false);
@@ -24,17 +23,11 @@ const Login = () => {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const query = await fetch('http://localhost:5000/api/v1/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-    
+        const query = await api(`${URL}/api/v1/auth/login`, data, 'POST');
         const response = await query.json();
+      
         if(query.status == 200){
-            setDataContext({user: {id: response.data.id, level: response.data.level }})
+            localStorage.setItem('lotto', JSON.stringify(response.data.token));
             navigate('/vender');
         }else{
             setInvalid(response.message)
@@ -48,7 +41,7 @@ const Login = () => {
             <div className='container'>
                 <form className='form' onSubmit={e => handleSubmit(e)}>
                     <label>Name:</label>
-                    <input className='input' type="text" onChange={e => handleChange(e)} name="name" autoComplete='off' required/>
+                    <input className='input' type="text" onChange={e => handleChange(e)} name="user" autoComplete='off' required/>
                     <label>Contraseña:</label>
                     <input className='input' type="password" onChange={e => handleChange(e)} name="pass" autoComplete='off' required/>
                     <button>Entrar</button>
