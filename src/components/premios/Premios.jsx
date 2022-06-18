@@ -1,0 +1,88 @@
+import { useState, useEffect } from 'react';
+import Menu from "../menu/Menu";
+import useGetUser from '../../hooks/useGetUser';
+import { useNavigate } from 'react-router-dom';
+import api from '../../services/api';
+import Portal from '../portal/Portal';
+import './premios.css';
+
+const Premios = () => {
+
+    const navigate = useNavigate();
+    const URL = import.meta.env.VITE_APP_URL;
+    const [premios, setPremios] = useState([]);
+    const [modal, setModal ] = useState(false);
+    const [input, setInput ] = useState(0);
+    const [typePremio, setTypePremio ] = useState(0);
+
+    useEffect(() => {
+        ( async() => {
+            const checkUser = await useGetUser();
+            if(!checkUser.id){
+                navigate('/login');
+            }
+            getPremios();
+        })();
+    }, []);
+
+ 
+    const getPremios = async () => {
+        const query = await fetch(`${URL}/api/v1/premios`);
+        const dataPremios =  await query.json();
+        setPremios(dataPremios.data);
+    }
+
+    const handleInput = (type) => {
+        setTypePremio(type)
+        setModal(true);
+    }
+
+    const handleSubmit = async () => {
+        const token = localStorage.getItem('lotto').replaceAll('"', '');
+        await api(`${URL}/api/v1/premios`, { token, type: typePremio, premio: input }, "PUT");
+        setModal(false);
+        setInput(0);
+        setTypePremio(0);
+        //Obtenemos los premios para actualizar le estado
+        getPremios();
+    }
+
+    const descriptionPremios = {
+        1: "2 ",
+        2: "3 ",
+        3: "4 ",
+        4: "5 "
+    }
+
+    return ( 
+        <div className="premios">
+            {modal &&
+                <Portal>
+                    <div className="modal-card">
+                        <h2>Desea Modificar?</h2>
+                        <input className='form-control' type="number" onChange={(e) => setInput(e.target.value)} value={input}/>
+                        <div>
+                        <button className='modal-btn' onClick={() => handleSubmit(input)}>Cargar</button>
+                        <button className='modal-btn' onClick={() => setModal(false)}>Cerrar</button>
+                        </div>
+                    </div>
+                </Portal>
+            }
+            <Menu />
+            <h2>Premios</h2>
+            <div className='card-container'>
+                {premios.length > 0 && 
+                premios.map(premio => (
+                    <div className='card' key={premio._id}>
+                        <h5>{descriptionPremios[premio.type]} Aciertos</h5>
+                        <p>Premio: {premio.premio}</p>
+                        <button 
+                            onClick={() => handleInput(premio.type)}>Actualizar</button>
+                    </div>
+                ))}
+            </div>
+        </div>
+     );
+}
+ 
+export default Premios;

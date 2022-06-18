@@ -1,0 +1,26 @@
+.premios .card-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0 20px;
+    height: 60vh;
+}
+
+.premios .card{
+    min-width: 300px;
+    background-color: #34495e;
+    height: auto;
+    margin: 10px;
+}
+
+.modal-card .form-control{
+    margin: 10px auto;
+    width: 200px;
+    background-color: transparent;
+    /* border: none; */
+    padding: 5px;
+    border-radius: 15px;
+    font-size: 25px;
+    color: white;
+}
