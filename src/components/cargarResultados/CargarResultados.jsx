@@ -6,6 +6,7 @@ import Portal from '../portal/Portal';
 import useGetUser from '../../hooks/useGetUser';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
+import animal from '../../helpers/dataAnimal';
 
 const CargarResultados = () => {
 
@@ -40,48 +41,6 @@ const CargarResultados = () => {
         {number: 19, time: "7:00 pm", resultado: "--"}
     ]);
 
-    const [animal, setAnimal] = useState([
-        { number: "0", name: "Delfin", url: "" },
-        { number: "00", name: "Ballena", url: ""  },
-        { number: "01", name: "Carnero", url: ""  },
-        { number: "02", name: "Toro", url: ""  },
-        { number: "03", name: "Ciempiés", url: ""  },
-        { number: "04", name: "Alacrán", url: ""  },
-        { number: "05", name: "Leon", url: ""  },
-        { number: "06", name: "Rana", url: ""  },
-        { number: "07", name: "Perico", url: ""  },
-        { number: "08", name: "Raton", url: ""  },
-        { number: "09", name: "Aguila", url: ""  },
-        { number: "10", name: "Tigre", url: ""  },
-        { number: "11", name: "Gato", url: ""  },
-        { number: "12", name: "Caballo", url: ""  },
-        { number: "13", name: "Mono", url: ""  },
-        { number: "14", name: "Paloma", url: ""  },
-        { number: "15", name: "Zorro", url: ""  },
-        { number: "16", name: "Oso", url: ""  },
-        { number: "17", name: "Pavo", url: ""  },
-        { number: "18", name: "Burro", url: ""  },
-        { number: "19", name: "Chivo", url: ""  },
-        { number: "20", name: "Cochino", url: ""  },
-        { number: "21", name: "Gallo", url: ""  },
-        { number: "22", name: "Camello", url: ""  },
-        { number: "23", name: "cebra", url: ""  },
-        { number: "24", name: "Iguana", url: ""  },
-        { number: "25", name: "Gallina", url: ""  },
-        { number: "26", name: "Vaca", url: ""  },
-        { number: "27", name: "Perro", url: ""  },
-        { number: "28", name: "Zamuro", url: ""  },
-        { number: "29", name: "Elefante", url: ""  },
-        { number: "30", name: "Caimán", url: ""  },
-        { number: "31", name: "Lapa", url: ""  },
-        { number: "32", name: "Ardilla", url: ""  },
-        { number: "33", name: "Pescado", url: ""  },
-        { number: "34", name: "Venado", url: ""  },
-        { number: "35", name: "Jirafa", url: ""  },
-        { number: "36", name: "Culebra", url: ""  }
-    ]);
-
-
     useEffect(() => {
         ( async() => {
             const checkUser = await useGetUser();
@@ -97,12 +56,12 @@ const CargarResultados = () => {
         const data = await query.json();
 
         const dataDb = Object.values(data).flat();
-       
+
         const newResult = resultados.map((r, index) => { 
             r.resultado = "--";
             dataDb.forEach( d => {
                 if(r.number === d.number){             
-                    r.resultado = d.number;
+                    r.resultado = d.sorteo;
                 }
             })
             return r;

@@ -17,7 +17,9 @@ const Ticket = ({data}) => {
             <span>#{data.count}</span>
             <span>hora: {`${time.getHours()}:${time.getMinutes()}`}</span>
             <span>{status[data.status]}</span>
-            <span>Paga: {data.premio}</span>
+            <span>Premio: {data.premio}</span>
+            <span>Precio: {data.precio}</span>
+            <span>Aciertos: {data.aciertos}</span>
             <div>
                 {data.numbers.map((d, index) => (
                     <div style={{display: 'flex', alignItems: 'flex-start'}} key={index}>Numero: {d} | {dataAnimal.filter(a=> a.number == d && a.name )[0].name}</div>

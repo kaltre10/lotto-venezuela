@@ -3,7 +3,7 @@ export default [
     { number: "00", name: "Ballena", url: ""  },
     { number: "01", name: "Carnero", url: ""  },
     { number: "02", name: "Toro", url: ""  },
-    { number: "03", name: "ciempiés", url: ""  },
+    { number: "03", name: "Ciempiés", url: ""  },
     { number: "04", name: "Alacrán", url: ""  },
     { number: "05", name: "Leon", url: ""  },
     { number: "06", name: "Rana", url: ""  },

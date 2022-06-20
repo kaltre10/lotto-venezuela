@@ -49,23 +49,26 @@ const Ventas = () => {
     let sumaPremio = 0;
 
     allVentas.forEach((ventas, index) => {
-  
-        if(ventasUser.length == 0){
-            ventasUser.push({ user: ventas.user.name, ventas: 0, premio: 0 });
+        
+        if(ventas.status != 1){ //no tomar los anulados "status: 1"
+            if(ventasUser.length == 0){
+                ventasUser.push({ user: ventas.user.name, ventas: 0, premio: 0 });
+            }
+    
+            if(ventasUser.filter(v => v.user == ventas.user.name).length == 0){
+                ventasUser.push({ user: ventas.user.name, ventas: 0, premio: 0 })
+            } 
+            
+            ventasUser.map((d, i) => {
+                if(d.user == ventas.user.name){
+                    ventasUser[i].ventas = ventasUser[i].ventas + ventas.precio;
+                    ventasUser[i].premio = ventasUser[i].premio + ventas.premio;
+                }
+            })
+            sumaVentas = sumaVentas + ventas.precio;
+            sumaPremio = sumaPremio + ventas.premio;
         }
 
-        if(ventasUser.filter(v => v.user == ventas.user.name).length == 0){
-            ventasUser.push({ user: ventas.user.name, ventas: 0, premio: 0 })
-        } 
-        
-        ventasUser.map((d, i) => {
-            if(d.user == ventas.user.name){
-                ventasUser[i].ventas = ventasUser[i].ventas + ventas.precio;
-                ventasUser[i].premio = ventasUser[i].premio + ventas.premio;
-            }
-        })
-        sumaVentas = sumaVentas + ventas.precio;
-        sumaPremio = sumaPremio + ventas.premio;
     })
     
     return ( 
@@ -90,12 +93,15 @@ const Ventas = () => {
                     users.map(u => (
                         <div className='vendedor'>
                         <div className='vendedor-vendedor'>{u.user}</div>
-                        <div className='vendedor-ventas'>{ventasUser.filter( v => v.user == u.user)[0].ventas}</div>
-                        <div className='vendedor-premios'>{ventasUser.filter( v => v.user == u.user)[0].premio}</div>
+                        <div className='vendedor-ventas'>{ventasUser.length > 0 ? ventasUser.filter( v => v.user == u.user)[0].ventas : 0}</div>
+                        <div className='vendedor-premios'>{ventasUser.length > 0 ? ventasUser.filter( v => v.user == u.user)[0].premio : 0}</div>
                         <div className='vendedor-queda'>
                         {
+                            ventasUser.length > 0 
+                            ?
                             ventasUser.filter( v => v.user == u.user)[0].ventas -
                             ventasUser.filter( v => v.user == u.user)[0].premio
+                            : 0
                         }</div>
                     </div>
                     ))
