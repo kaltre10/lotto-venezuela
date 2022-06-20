@@ -45,7 +45,7 @@ const CargarResultados = () => {
         { number: "00", name: "Ballena", url: ""  },
         { number: "01", name: "Carnero", url: ""  },
         { number: "02", name: "Toro", url: ""  },
-        { number: "03", name: "cienpiés", url: ""  },
+        { number: "03", name: "Ciempiés", url: ""  },
         { number: "04", name: "Alacrán", url: ""  },
         { number: "05", name: "Leon", url: ""  },
         { number: "06", name: "Rana", url: ""  },
@@ -112,7 +112,7 @@ const CargarResultados = () => {
 
     const handleSave = async () => {
         if(resultado.number && resultado.resultado){
-            await api('http://localhost:5000/api/v1/resultados/save-resultado', resultado, 'POST');
+            await api(`${URL}/api/v1/resultados/save-resultado`, resultado, 'POST');
             setResultado({ number: '', resultado: '', date: `${String(date.getFullYear())}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`});
             getResultados();
             setModal(false)
