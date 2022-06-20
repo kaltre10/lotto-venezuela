@@ -35,8 +35,13 @@ const Ventas = () => {
     }
 
     //obtener array de usuarios
-    allVentas.map(v => users.filter(u => u.user == v.user.name).length == 0 
-    && setUsers([...users, {user: v.user.name, ventas: 0}]));
+    allVentas.map(v => { 
+            if(!v.user) v.user = { name: 'default' }
+            if(users.filter(u => u.user == v.user.name).length == 0){
+                setUsers([...users, {user: v.user.name, ventas: 0, premio: 0}])
+            } 
+        
+    });
 
     const ventasUser = [];
     let sumaVentas = 0;
@@ -93,10 +98,9 @@ const Ventas = () => {
                         {
                             ventasUser.length > 0 
                             ?
-                                ventasUser.filter( v => v.user == u.user)[0].ventas -
-                                ventasUser.filter( v => v.user == u.user)[0].premio
-                            :   
-                                0
+                            ventasUser.filter( v => v.user == u.user)[0].ventas -
+                            ventasUser.filter( v => v.user == u.user)[0].premio
+                            : 0
                         }</div>
                     </div>
                     ))
