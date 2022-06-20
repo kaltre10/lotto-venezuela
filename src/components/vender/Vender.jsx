@@ -22,7 +22,6 @@ const Vender = () => {
         (async () => {
             
             if(!dataContext.user.id){
-                console.log('ok')
                 let user = await useGetUser();  
                 if(!user.id){
                     navigate('/login');
