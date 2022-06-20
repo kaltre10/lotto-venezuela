@@ -12,8 +12,11 @@ const Premios = () => {
     const URL = import.meta.env.VITE_APP_URL;
     const [premios, setPremios] = useState([]);
     const [modal, setModal ] = useState(false);
+    const [modalPrecio, setModalPrecio ] = useState(false);
     const [input, setInput ] = useState(0);
+    const [inputPrecio, setInputPrecio ] = useState(0);
     const [typePremio, setTypePremio ] = useState(0);
+    const [precio, setPrecio ] = useState(0);
 
     useEffect(() => {
         ( async() => {
@@ -22,6 +25,7 @@ const Premios = () => {
                 navigate('/login');
             }
             getPremios();
+            getPrecio();
         })();
     }, []);
 
@@ -30,6 +34,12 @@ const Premios = () => {
         const query = await fetch(`${URL}/api/v1/premios`);
         const dataPremios =  await query.json();
         setPremios(dataPremios.data);
+    }
+
+    const getPrecio = async () => {
+        const query = await fetch(`${URL}/api/v1/precios`);
+        const dataPrecio =  await query.json();
+        setPrecio(dataPrecio.data[0].precio);
     }
 
     const handleInput = (type) => {
@@ -45,6 +55,15 @@ const Premios = () => {
         setTypePremio(0);
         //Obtenemos los premios para actualizar le estado
         getPremios();
+    }
+
+    const handleSubmitPrecio = async () => {
+        const token = localStorage.getItem('lotto').replaceAll('"', '');
+        await api(`${URL}/api/v1/precios`, { token, precio: inputPrecio }, "PUT");
+        setModalPrecio(false);
+        setInputPrecio(0);
+        //Obtenemos el precio para actualizar le estado
+        getPrecio();
     }
 
     const descriptionPremios = {
@@ -68,6 +87,18 @@ const Premios = () => {
                     </div>
                 </Portal>
             }
+            {modalPrecio &&
+                <Portal>
+                    <div className="modal-card">
+                        <h2>Desea Modificar?</h2>
+                        <input className='form-control' type="number" onChange={(e) => setInputPrecio(e.target.value)} value={inputPrecio}/>
+                        <div>
+                        <button className='modal-btn' onClick={() => handleSubmitPrecio()}>Cargar</button>
+                        <button className='modal-btn' onClick={() => setModalPrecio(false)}>Cerrar</button>
+                        </div>
+                    </div>
+                </Portal>
+            }
             <Menu />
             <h2>Premios</h2>
             <div className='card-container'>
@@ -80,6 +111,13 @@ const Premios = () => {
                             onClick={() => handleInput(premio.type)}>Actualizar</button>
                     </div>
                 ))}
+            </div>
+            <h2>Precio</h2>
+            <div className='card-container'>
+                <div className='card'>
+                    <p>Precio actual del ticket: {precio}</p>
+                    <button onClick={() => setModalPrecio(true)}>Actualizar</button>
+                </div>
             </div>
         </div>
      );

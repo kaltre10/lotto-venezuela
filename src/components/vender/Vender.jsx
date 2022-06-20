@@ -6,18 +6,23 @@ import { useNavigate } from "react-router-dom";
 import api from '../../services/api';
 import Card from '../card/Card';
 import Menu from '../menu/Menu';
+import animal from '../../helpers/dataAnimal';
 
 const Vender = () => {
 
     let navigate = useNavigate();
     const [ticket, setTicket] = useState([]);
     const [modal, setModal] = useState({message : '', status: false});
+    const [aciertos, setAciertos] = useState([]);
+    const [precio, setPrecio] = useState(0);
     const {dataContext, setDataContext} = useContext(UserContex);
     const URL = import.meta.env.VITE_APP_URL;
 
     useEffect(() => {
         (async () => {
+            
             if(!dataContext.user.id){
+                console.log('ok')
                 let user = await useGetUser();  
                 if(!user.id){
                     navigate('/login');
@@ -27,51 +32,32 @@ const Vender = () => {
                     navigate('/ventas');
                 }
             }
+            //Obtenemos los aciertos
+            getAciertos();
+
+            //Obtenemos el precio del ticket
+            getprecio();
         })();
     }, []);
 
-    const animal = [
-        { number: 1, name: "name", url: "" },
-        { number: 2, name: "name", url: ""  },
-        { number: 3, name: "name", url: ""  },
-        { number: 4, name: "name", url: ""  },
-        { number: 5, name: "name", url: ""  },
-        { number: 6, name: "name", url: ""  },
-        { number: 7, name: "name", url: ""  },
-        { number: 8, name: "name", url: ""  },
-        { number: 9, name: "name", url: ""  },
-        { number: 10, name: "name", url: ""  },
-        { number: 11, name: "name", url: ""  },
-        { number: 12, name: "name", url: ""  },
-        { number: 13, name: "name", url: ""  },
-        { number: 14, name: "name", url: ""  },
-        { number: 15, name: "name", url: ""  },
-        { number: 16, name: "name", url: ""  },
-        { number: 17, name: "name", url: ""  },
-        { number: 18, name: "name", url: ""  },
-        { number: 19, name: "name", url: ""  },
-        { number: 20, name: "name", url: ""  },
-        { number: 21, name: "name", url: ""  },
-        { number: 22, name: "name", url: ""  },
-        { number: 23, name: "name", url: ""  },
-        { number: 24, name: "name", url: ""  },
-        { number: 25, name: "name", url: ""  },
-        { number: 26, name: "name", url: ""  },
-        { number: 27, name: "name", url: ""  },
-        { number: 28, name: "name", url: ""  },
-        { number: 29, name: "name", url: ""  },
-        { number: 30, name: "name", url: ""  },
-        { number: 31, name: "name", url: ""  },
-        { number: 32, name: "name", url: ""  },
-        { number: 33, name: "name", url: ""  }
-    ]
+    const getAciertos = async () => {
+        const query = await fetch(`${URL}/api/v1/premios`);
+        const aciertos = await query.json();
+        setAciertos(aciertos.data);
+    }
+
+    const getprecio = async () => {
+        const query = await fetch(`${URL}/api/v1/precios`);
+        const precio = await query.json();
+        setPrecio(precio.data[0].precio);
+    }
 
     const handleChange = (data) => {
-        let num = data - 1;
-        if(ticket.length < 5) setTicket([ ...ticket, { 
-                                    number: animal[num].number,
-                                    name: animal[num].name
-                                }]);
+        if(ticket.length < 5) setTicket([ 
+            ...ticket, { 
+                        number: animal.filter(a => a.number == data)[0].number,
+                        name: animal.filter(a => a.number == data)[0].name
+                    }]);
     }
 
     const handleDelete = (number) => {
@@ -79,14 +65,12 @@ const Vender = () => {
     }
 
     const handleClick = async () => {
-
         const data = {
             token: localStorage.getItem('lotto').replaceAll('"', ''),
             numbers: ticket.map( t => t.number).flat()
         }
         const query = await api(`${URL}/api/v1/ventas`, {ticket:data}, 'POST')
         const response = await query.json();
-        // console.log(response)
         if(query.status == 200){
             setTicket([])
             setModal({message:"Ticket Guardado", status: true})
@@ -94,7 +78,7 @@ const Vender = () => {
             setModal(response.message, true)
         }
     }
-
+    
     return ( 
     <div className='vender'>
         {modal.status &&
@@ -130,10 +114,17 @@ const Vender = () => {
                     ))}
                     </ul>
                 </div>
-                <p className='precio'>Precio: 20 bs</p>
+                <p className='precio'>Precio del ticket: {precio} bs</p>
+                <div className='aciertos'>
+                    {aciertos.length > 0 && (
+                        aciertos.map(acierto => (
+                            <span key={acierto._id} className='acierto'>{acierto.type + 1} Aciertos: {acierto.premio}</span>
+                        ))
+                    )}
+                </div>
                 <button 
-                    className={ticket.length < 2 ? 'btn-disabled' : undefined}
-                    disabled = {ticket.length < 2 ? true : false}
+                    className={ticket.length < 5 ? 'btn-disabled' : undefined}
+                    disabled = {ticket.length < 5 ? true : false}
                     onClick={() => handleClick()}
                 >Guardar</button>
             </div>

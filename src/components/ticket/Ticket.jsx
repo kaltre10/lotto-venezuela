@@ -1,4 +1,5 @@
 import './ticket.css';
+import dataAnimal from '../../helpers/dataAnimal';
 
 const Ticket = ({data}) => {
     // let id = data._id.slice(-5, -1);
@@ -10,7 +11,7 @@ const Ticket = ({data}) => {
         2: "Pagado",
         3: "Ganador"
     }
-   
+  
     return ( 
         <div className="ticket">
             <span>#{data.count}</span>
@@ -19,7 +20,7 @@ const Ticket = ({data}) => {
             <span>Paga: {data.premio}</span>
             <div>
                 {data.numbers.map((d, index) => (
-                    <div key={index}>Numero: {d} | name</div>
+                    <div style={{display: 'flex', alignItems: 'flex-start'}} key={index}>Numero: {d} | {dataAnimal.filter(a=> a.number == d && a.name )[0].name}</div>
                 ))}
             </div>
         </div>

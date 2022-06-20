@@ -9,7 +9,15 @@
     width: 80%;
     /* justify-content: space-evenly; */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
     gap: 50px 250px;
+}
+
+.vendedor-vendedor,
+.vendedor-ventas,
+.vendedor-premios,
+.vendedor-queda{
+    width: 150px;
+    text-align: start;
 }

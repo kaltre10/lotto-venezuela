@@ -3,7 +3,6 @@ import Menu from '../menu/Menu';
 import CardResultados from '../cardResultados/CardResultados';
 import useGetUser from '../../hooks/useGetUser';
 import { useNavigate } from 'react-router-dom';
-import api from '../../services/api';
 import './resultados.css';
 const Resultados = () => {
 

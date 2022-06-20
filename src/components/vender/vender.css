@@ -28,7 +28,7 @@ h2{
     border-radius: 25px;
     padding: 10px;  
     position: relative;
-    overflow-y: auto;  
+    overflow-y: hidden;  
 }
 
 .form-selection p{
@@ -75,6 +75,20 @@ h2{
     left: 0;
 } 
 
+.vender .aciertos{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: flex-start;
+    bottom: 60px;
+    height: 100px;
+}
+
+.vender .acierto{
+    font-size: 16px;
+    font-weight: 400;
+}
+
 .vender .modal-error{
     width: 100%;
     height: 100vh;
@@ -84,6 +98,12 @@ h2{
     position: absolute;
     top: 0;
     z-index: 1;
+}
+
+.vender .precio{
+    position: absolute;
+    bottom: 130px;
+
 }
 
 .modal-error .container{

@@ -26,7 +26,7 @@ const Menu = () => {
                     <li><NavLink to='/crear'>Crear Vendedor</NavLink></li>
                     <li><NavLink to='/resultados-crear'>Resultados</NavLink></li>
                     <li><NavLink to='/pagar'>Pagar/Anular</NavLink></li>
-                    <li><NavLink to='/premios'>Premios</NavLink></li>
+                    <li><NavLink to='/premios'>Premios/Precio</NavLink></li>
                     <li><a href='#' onClick={() => handleClose()}>Cerrar</a></li>
                 </ul>
             </nav> 
