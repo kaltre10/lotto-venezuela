@@ -35,14 +35,8 @@ const Ventas = () => {
     }
 
     //obtener array de usuarios
-    allVentas.map(v => { 
-        if(users.filter(u => u.user == v.user.name).length == 0){
-            // dataVenta = dataVenta + v.precio;
-            // console.log(dataVenta);
-
-            setUsers([...users, {user: v.user.name, ventas: 0, premio: 0}])
-        } 
-    });
+    allVentas.map(v => users.filter(u => u.user == v.user.name).length == 0 
+    && setUsers([...users, {user: v.user.name, ventas: 0}]));
 
     const ventasUser = [];
     let sumaVentas = 0;
@@ -80,7 +74,7 @@ const Ventas = () => {
                 <input type='date' name='desde' value={desde} onChange={e => setDesde(e.target.value)}/>
                 <label>Hasta:</label>
                 <input type='date' name='hasta' value={hasta} onChange={e => setHasta(e.target.value)}/>
-                <button>Consultar</button>
+                <button onClick={() => getVentas()}>Consultar</button>
             </div>
             <div className='container'>
                 <div className='vendedor'>
@@ -99,9 +93,10 @@ const Ventas = () => {
                         {
                             ventasUser.length > 0 
                             ?
-                            ventasUser.filter( v => v.user == u.user)[0].ventas -
-                            ventasUser.filter( v => v.user == u.user)[0].premio
-                            : 0
+                                ventasUser.filter( v => v.user == u.user)[0].ventas -
+                                ventasUser.filter( v => v.user == u.user)[0].premio
+                            :   
+                                0
                         }</div>
                     </div>
                     ))

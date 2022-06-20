@@ -15,6 +15,7 @@ const Reportes = () => {
     const navigate = useNavigate();
     const date = new Date();
     const [ day, setDay ] = useState(`${String(date.getFullYear())}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`);
+    const [status, setStatus] = useState(0);
 
     useEffect(() => {
         ( async () => {
@@ -28,7 +29,7 @@ const Reportes = () => {
 
     const getReporte = async () => {
         const token = localStorage.getItem('lotto').replaceAll('"', '');
-        const query = await api(`${URL}/api/v1/ventas/ticket-user`, { token, date: day }, "POST");
+        const query = await api(`${URL}/api/v1/ventas/ticket-user`, { token, date: day, status }, "POST");
         const data = await query.json();
         setTickets([data]);
     }
@@ -39,12 +40,11 @@ const Reportes = () => {
             <h2>Reportes</h2>
             <div className='container'>
                 <div>
-                    <select>
-                        <option value="1">Todos</option>
-                        <option value="2">Anulados</option>
-                        <option value="3">Perdedores</option>
+                    <select onChange={e => setStatus(e.target.value)}>
+                        <option value="0">Todos</option>
+                        <option value="1">Anulados</option>
+                        <option value="2">Pagados</option>
                         <option value="3">Ganadores</option>
-                        <option value="3">Pagados</option>
                     </select>
                     <input type="date" value={day} onChange={e => setDay(e.target.value)} />
                     <button onClick={() => getReporte()}>Consultar</button>
