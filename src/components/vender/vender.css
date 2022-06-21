@@ -121,3 +121,22 @@ h2{
 .modal-error .btn{
     cursor: pointer;
 }
+
+.vender .ticket{
+    background-color: white;
+    height: 200px;
+    margin-bottom: 20px;
+    color: #000;
+    display: flex;
+    text-align: start;
+}
+
+.vender .ul{
+    position: relative;
+    right: 20px;
+    top: -10px;
+}
+
+.vender .li{
+    list-style: none;
+}

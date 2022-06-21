@@ -15,6 +15,12 @@ const Vender = () => {
     const [modal, setModal] = useState({message : '', status: false});
     const [aciertos, setAciertos] = useState([]);
     const [precio, setPrecio] = useState(0);
+    const [lastTicket, setLastTicket] = useState({
+        count: 0,
+        numbers: [],
+        hora: null,
+        date: null
+    });
     const {dataContext, setDataContext} = useContext(UserContex);
     const URL = import.meta.env.VITE_APP_URL;
 
@@ -72,10 +78,31 @@ const Vender = () => {
         const response = await query.json();
         if(query.status == 200){
             setTicket([])
-            setModal({message:"Ticket Guardado", status: true})
+            setModal({message:"Ticket Guardado", status: true});
+
+            //ajustar fecha para mostrar en el ticket
+            let date = new Date(response.data.createdAt);
+            let hora = `${date.getHours()}:${date.getMinutes()}`;
+            let d = String(date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0'));
+            setLastTicket({
+                count: response.data.count,
+                numbers: response.data.numbers,
+                hora,
+                date: d
+            });
         }else{
-            setModal(response.message, true)
+            setModal(response.message, true);
         }
+    }
+
+    const handleSave = () => {
+        setModal({message: "", status: false});
+        setLastTicket({
+            count: 0,
+            numbers: [],
+            hora: null,
+            date: null
+        });
     }
     
     return ( 
@@ -84,7 +111,24 @@ const Vender = () => {
         <div className='modal-error'>
             <div className='container'>
                 <h3>{modal.message}</h3>
-                <button className='btn' onClick={() => setModal({message: "", status: false})}>Continuar</button>
+                <div className='ticket'>
+                    {/* <h4>Mega Lotto Venezuela</h4>
+                    <p># 211 | Hora: 10:27 am</p>
+                    <p>Fecha: 21/06/2022</p>
+                    <b>Números:</b> */}
+                    <ul className='ul'> 
+                        <li className='li'><b>Mega Lotto Venezuela</b></li>
+                        <li className='li'># {lastTicket.count} | Hora: {lastTicket.hora}</li>
+                        <li className='li'>Fecha: {lastTicket.date}</li>
+                        <li className='li'><b>Números:</b></li>
+                        <li className='li'># {lastTicket.numbers[0]} | {animal.filter( a => a.number == lastTicket.numbers[0])[0].name}</li>
+                        <li className='li'># {lastTicket.numbers[1]} | {animal.filter( a => a.number == lastTicket.numbers[1])[0].name}</li>
+                        <li className='li'># {lastTicket.numbers[2]} | {animal.filter( a => a.number == lastTicket.numbers[2])[0].name}</li>
+                        <li className='li'># {lastTicket.numbers[3]} | {animal.filter( a => a.number == lastTicket.numbers[3])[0].name}</li>
+                        <li className='li'># {lastTicket.numbers[4]} | {animal.filter( a => a.number == lastTicket.numbers[4])[0].name}</li>
+                    </ul>
+                </div>
+                <button className='btn' onClick={() => handleSave()}>Continuar</button>
             </div>
         </div>}
         <Menu />
