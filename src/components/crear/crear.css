@@ -28,8 +28,18 @@
     justify-content: center;
 }
 
-.crear .delete{
+.crear .delete, .crear .update{
     cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    margin: 0;
+}
+
+.crear .delete:hover, .crear .update:hover{
+    background-color: aquamarine;
 }
 
 .modal-card {
@@ -40,6 +50,17 @@
     border-radius: 25px;
     background-color: #34495e;
   }
+
+.modal-card .form-control{
+    margin: 10px auto;
+    width: 200px;
+    background-color: transparent;
+    /* border: none; */
+    padding: 5px;
+    border-radius: 15px;
+    font-size: 25px;
+    color: white;
+}
 
 .modal-btn {
     cursor: pointer;

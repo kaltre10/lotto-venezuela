@@ -106,6 +106,13 @@ h2{
 
 }
 
+.vender .pago{
+    position: absolute;
+    right: 10px;
+    bottom: 70px;
+
+}
+
 .modal-error .container{
     display: flex;
     flex-direction: column;

@@ -12,7 +12,10 @@ const Crear = () => {
     const URL = import.meta.env.VITE_APP_URL;
 
     const [modal, setModal] = useState(false);
+    const [modalUpdate, setModalUpdate] = useState(false);
     const [selectedDelete, setSectedDelete] = useState(0);
+    const [selectedUpdate, setSelecteUpdate] = useState(0);
+    const [saldoUpdate, setSaldoUpdate] = useState(0);
     const [form, setForm] = useState({
         user: '',
         name: '',
@@ -49,9 +52,26 @@ const Crear = () => {
         getUsers();
     }
 
+    const updateUser = async () => {
+        const token = localStorage.getItem('lotto').replaceAll('"', '');
+        await api(`${URL}/api/v1/auth/users-saldo`, {
+            token,
+            saldo: saldoUpdate,
+            userId: selectedUpdate
+        }, 'POST');
+        getUsers();
+        setModalUpdate(false);
+        setSaldoUpdate(0);
+    }
+
     const handleDelete = async (id) => {
         setModal(true);
         setSectedDelete(id)
+    }
+
+    const handleUpdate = async (idUser) => {
+        setModalUpdate(true);
+        setSelecteUpdate(idUser);
     }
 
     const getUsers = async () => {
@@ -82,6 +102,19 @@ const Crear = () => {
                     </div>
                 </Portal>
             }
+            {modalUpdate &&
+                <Portal>
+                    <div className="modal-card">
+                        <h2>Modificar Saldo del Usuario:</h2>
+                        
+                        <div>
+                        <input className='form-control' type="number" min={0} onChange={(e) => setSaldoUpdate(e.target.value)} value={saldoUpdate}/>
+                        <button className='modal-btn' onClick={() => updateUser()}>Guardar</button>
+                        <button className='modal-btn' onClick={() => setModalUpdate(false)}>Cerrar</button>
+                        </div>
+                    </div>
+                </Portal>
+            }
             <Menu />
             <h2>Crear Vendedor</h2>
             <div className='container'>
@@ -98,9 +131,10 @@ const Crear = () => {
                         <div key={v._id} className='list-item'>
                             <div>
                                 <div><span>Nombre: {v.name}</span></div>
-                                <div><span>usuario: {v.user} | Clave: {v.pass}</span></div>
+                                <div><span>usuario: {v.user} | Clave: {v.pass} | Saldo: {v.saldo}</span></div>
                             </div>
                             <div className='delete' title='Eliminar' onClick={()=>handleDelete(v._id)}>❌</div>
+                            <div className='update' title='Modificar Saldo' onClick={()=>handleUpdate(v._id)}>💰</div>
                         </div>
                     ))}
                     

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom'; 
 import { UserContex } from '../../context/DataUserContext';
 import './menu.css';
@@ -11,7 +11,7 @@ const Menu = () => {
     let navigate = useNavigate();
 
     const handleClose = () => {
-        setDataContext({ user: {id: null, level: 0}})
+        setDataContext({ user: {id: null, level: 0, saldo: 0}})
         localStorage.removeItem('lotto')
         navigate('/login');
     }
@@ -37,6 +37,7 @@ const Menu = () => {
                     <li><NavLink to='/vender'>Vender</NavLink></li>
                     <li><NavLink to='/resultados'>Resultados</NavLink></li>
                     <li><NavLink to='/reportes'>Reportes</NavLink></li>
+                    <li>Saldo: {dataContext.user.saldo}</li>
                     <li><a href='#' onClick={() => handleClose()}>Cerrar</a></li>
                 </ul>
             </nav> 

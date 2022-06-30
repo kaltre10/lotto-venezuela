@@ -15,6 +15,7 @@ const Vender = () => {
     const [modal, setModal] = useState({message : '', status: false});
     const [aciertos, setAciertos] = useState([]);
     const [precio, setPrecio] = useState(0);
+    const [pago, setPago] = useState(0);
     const [lastTicket, setLastTicket] = useState({
         count: 0,
         numbers: [],
@@ -32,7 +33,7 @@ const Vender = () => {
                 if(!user.id){
                     navigate('/login');
                 }
-                setDataContext({ user: { id: user.id, level: user.level}});
+                setDataContext({ user: { id: user.id, level: user.level, saldo: user.saldo}});
                 if(user.level == 1) {
                     navigate('/ventas');
                 }
@@ -42,8 +43,10 @@ const Vender = () => {
 
             //Obtenemos el precio del ticket
             getprecio();
+
         })();
     }, []);
+
 
     const getAciertos = async () => {
         const query = await fetch(`${URL}/api/v1/premios`);
@@ -164,6 +167,13 @@ const Vender = () => {
                             <span key={acierto._id} className='acierto'>{acierto.type + 1} Aciertos: {acierto.premio}</span>
                         ))
                     )}
+                </div>
+                <div className='pago'>
+                    <label>Forma de Pago: </label>
+                    <select onChange={(e) => setPago(e.target.value)} >
+                        <option value="0" selected>Efectivo</option>
+                        <option value="1">Saldo</option>
+                    </select>            
                 </div>
                 <button 
                     className={ticket.length < 5 ? 'btn-disabled' : undefined}
