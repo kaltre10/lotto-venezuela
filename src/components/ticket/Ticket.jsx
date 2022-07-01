@@ -20,6 +20,7 @@ const Ticket = ({data}) => {
             <span>Premio: {data.premio}</span>
             <span>Precio: {data.precio}</span>
             <span>Aciertos: {data.aciertos}</span>
+            <span>Pago: {data.pago == 0 ? "Efectivo" : "Saldo"}</span>
             <div>
                 {data.numbers.map((d, index) => (
                     <div style={{display: 'flex', alignItems: 'flex-start'}} key={index}>Numero: {d} | {dataAnimal.filter(a=> a.number == d && a.name )[0].name}</div>
