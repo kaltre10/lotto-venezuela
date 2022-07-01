@@ -1,5 +1,5 @@
 import './vender.css';
-import {useState, useContext, useEffect } from 'react';
+import {useState, useContext, useEffect, useRef } from 'react';
 import { UserContex } from '../../context/DataUserContext';
 import useGetUser from '../../hooks/useGetUser';
 import { useNavigate } from "react-router-dom";
@@ -7,15 +7,26 @@ import api from '../../services/api';
 import Card from '../card/Card';
 import Menu from '../menu/Menu';
 import animal from '../../helpers/dataAnimal';
+import Loader from '../loader/Loader';
+import Portal from '../portal/Portal';
 
 const Vender = () => {
 
     let navigate = useNavigate();
+
+    const selectInputRef = useRef();
+
     const [ticket, setTicket] = useState([]);
     const [modal, setModal] = useState({message : '', status: false});
+    const [modalError, setModalError] = useState({message : '', status: false});
     const [aciertos, setAciertos] = useState([]);
     const [precio, setPrecio] = useState(0);
     const [pago, setPago] = useState(0);
+    const [load, setLoad] = useState(true);
+    const [options, setOptions] = useState( [
+        { value: 0, name: 'Efectivo' },
+        { value: 1, name: 'saldo' },
+    ]);
     const [lastTicket, setLastTicket] = useState({
         count: 0,
         numbers: [],
@@ -27,23 +38,15 @@ const Vender = () => {
 
     useEffect(() => {
         (async () => {
-            
-            if(!dataContext.user.id){
-                let user = await useGetUser();  
-                if(!user.id){
-                    navigate('/login');
-                }
-                setDataContext({ user: { id: user.id, level: user.level, saldo: user.saldo}});
-                if(user.level == 1) {
-                    navigate('/ventas');
-                }
-            }
+
+            checkDataUser();
+
             //Obtenemos los aciertos
             getAciertos();
 
             //Obtenemos el precio del ticket
             getprecio();
-
+     
         })();
     }, []);
 
@@ -58,6 +61,7 @@ const Vender = () => {
         const query = await fetch(`${URL}/api/v1/precios`);
         const precio = await query.json();
         setPrecio(precio.data[0].precio);
+        setLoad(false);
     }
 
     const handleChange = (data) => {
@@ -73,9 +77,11 @@ const Vender = () => {
     }
 
     const handleClick = async () => {
+        setLoad(true);
         const data = {
             token: localStorage.getItem('lotto').replaceAll('"', ''),
-            numbers: ticket.map( t => t.number).flat()
+            numbers: ticket.map( t => t.number).flat(),
+            pago
         }
         const query = await api(`${URL}/api/v1/ventas`, {ticket:data}, 'POST')
         const response = await query.json();
@@ -93,9 +99,35 @@ const Vender = () => {
                 hora,
                 date: d
             });
+
+            //reinicar options
+            selectInputRef.current[0].selected = true;
+
+            //check saldo 
+            checkSaldo();
+            setLoad(false);
+
         }else{
-            setModal(response.message, true);
+            setModalError({message: JSON.stringify(response), status: true});
         }
+    }
+
+    const checkDataUser = async () => {
+        if(!dataContext.user.id){
+            let user = await useGetUser();  
+            if(!user.id){
+                navigate('/login');
+            }
+            setDataContext({ user: { id: user.id, level: user.level, saldo: user.saldo}});
+            if(user.level == 1) {
+                navigate('/ventas');
+            }
+        }
+    }
+
+    const checkSaldo = async () => {
+        let user = await useGetUser();  
+        setDataContext({ user: { id: user.id, level: user.level, saldo: user.saldo}});
     }
 
     const handleSave = () => {
@@ -110,6 +142,8 @@ const Vender = () => {
     
     return ( 
     <div className='vender'>
+        {load && <Portal><Loader /></Portal>}
+
         {modal.status &&
         <div className='modal-error'>
             <div className='container'>
@@ -134,6 +168,15 @@ const Vender = () => {
                 <button className='btn' onClick={() => handleSave()}>Continuar</button>
             </div>
         </div>}
+
+        {modalError.status &&
+        <div className='modal-error'>
+            <div className='container'>
+                <h3>{modalError.message}</h3>
+                <button className='btn' onClick={() => setModalError(false)}>Cerrar</button>
+            </div>
+        </div>}
+
         <Menu />
         <h2>Mega Lotto Venezuela</h2>
         <div className='container'>
@@ -170,9 +213,10 @@ const Vender = () => {
                 </div>
                 <div className='pago'>
                     <label>Forma de Pago: </label>
-                    <select onChange={(e) => setPago(e.target.value)} >
-                        <option value="0" selected>Efectivo</option>
-                        <option value="1">Saldo</option>
+                    <select className='form-control' onChange={(e) => setPago(e.target.value)} ref={selectInputRef}>
+                        {options.map(element => (  
+                            <option key={element.value} value={element.value}>{element.name}</option>
+                        ))}
                     </select>            
                 </div>
                 <button 

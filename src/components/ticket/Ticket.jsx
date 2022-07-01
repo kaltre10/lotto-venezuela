@@ -4,7 +4,7 @@ import dataAnimal from '../../helpers/dataAnimal';
 const Ticket = ({data}) => {
     // let id = data._id.slice(-5, -1);
     let time = new Date(data.createdAt);
-    console.log(data)
+
     const status = {
         0: "Proceso",
         1: "Anulado",

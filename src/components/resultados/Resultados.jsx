@@ -4,6 +4,8 @@ import CardResultados from '../cardResultados/CardResultados';
 import useGetUser from '../../hooks/useGetUser';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
+import Loader from '../loader/Loader';
+import Portal from '../portal/Portal';
 import './resultados.css';
 const Resultados = () => {
 
@@ -24,6 +26,7 @@ const Resultados = () => {
         {number: 18, time: "6:00 pm", resultado: "--"},
         {number: 19, time: "7:00 pm", resultado: "--"}
     ])
+    const [load, setLoad] = useState(true);
 
     useEffect(() => {
         ( async() => {
@@ -37,6 +40,7 @@ const Resultados = () => {
 
     
     const getResultados = async () => {
+        setLoad(true);
         const token = localStorage.getItem('lotto').replaceAll('"', '');
         const query = await api(`${URL}/api/v1/resultados/`, { token, date: day }, 'POST');
         const data = await query.json();
@@ -53,14 +57,17 @@ const Resultados = () => {
             return r;
         })
         setResultados(newResult);
+        setLoad(false);
     }
 
     return ( 
         <div className='resultados'>
+            {load && <Portal><Loader /></Portal>}
+
             <Menu />
             <h2>Resultados:</h2>
-            <div><input type="date" value={day} onChange={e => setDay(e.target.value)} />
-            <button onClick={() => getResultados()}>Consultar</button></div>
+            <div><input className='form-control' type="date" value={day} onChange={e => setDay(e.target.value)} />
+            <button className='form-control' onClick={() => getResultados()}>Consultar</button></div>
             <div className='container'>
                 {resultados.map( r => (
                     <CardResultados key={r.number} data={r}/>

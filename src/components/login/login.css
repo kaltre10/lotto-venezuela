@@ -2,8 +2,14 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    justify-content: center;
     align-items: center;
-    
+}
+
+.login .container-login{
+    background-color: #34495e;
+    padding: 30px;
+    border-radius: 25px;
 }
 
 .login .form{
@@ -21,4 +27,25 @@
 
 .login .invalid{
     color: tomato;
+}
+
+.login .btn{
+    cursor: pointer;
+    border-radius: 25px;
+    border: none;
+    padding: 3px;
+}
+
+.modal .container{
+    display: flex;
+    flex-direction: column;
+    background-color: #34495e;
+    padding: 30px;
+    border-radius: 25px;
+}
+
+.modal .btn{
+    cursor: pointer;
+    border-radius: 25px;
+    border: none;
 }

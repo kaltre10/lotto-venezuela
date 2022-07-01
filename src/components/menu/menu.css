@@ -16,3 +16,12 @@
 .menu .active{
     color: #f1c40f;
 }
+
+.menu .saldo{
+    padding: 20px;
+    font-size: 22px;
+    background-color: rgba(0, 255, 255, 0.558);
+    padding: 5px;
+    border-radius: 25px;
+    margin-right: 10px;
+}
