@@ -109,9 +109,9 @@ const Ventas = () => {
                 
                 <div className='vendedor'>
                     <div className='total-ventas'><span></span></div>
-                    <div className='total-ventas'><span>Ventas Total:</span> {sumaVentas}</div>
-                    <div className='total-premios'><span>Premios Total:</span>  {sumaPremio}</div>
-                    <div className='total'><span>Total Queda:</span> { sumaVentas - sumaPremio }</div>
+                    <div className='total-ventas'><span>Ventas Total:</span> {(sumaVentas).toFixed(2)} Bs</div>
+                    <div className='total-premios'><span>Premios Total:</span>  {(sumaPremio).toFixed(2)} Bs</div>
+                    <div className='total'><span>Total Queda:</span> { (sumaVentas - sumaPremio).toFixed(2)} Bs</div>
                 </div>
                
             </div>
