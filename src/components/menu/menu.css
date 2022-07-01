@@ -17,11 +17,22 @@
     color: #f1c40f;
 }
 
+.menu .container-saldo{
+    display: flex;
+}
+
 .menu .saldo{
+    display: flex;
+    align-items: center;
+    gap: 0 5px;
     padding: 20px;
     font-size: 22px;
     background-color: rgba(0, 255, 255, 0.558);
     padding: 5px;
     border-radius: 25px;
     margin-right: 10px;
+}
+
+.menu .img{
+    width: 30px;
 }

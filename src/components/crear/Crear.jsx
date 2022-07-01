@@ -4,6 +4,8 @@ import Menu from '../menu/Menu';
 import Portal from '../portal/Portal';
 import useGetUser from '../../hooks/useGetUser';
 import { useNavigate } from 'react-router-dom';
+import bolsa from '../../img/bolsa.png';
+import borrar from '../../img/delete.png';
 import './crear.css';
 
 const Crear = () => {
@@ -106,11 +108,10 @@ const Crear = () => {
                 <Portal>
                     <div className="modal-card">
                         <h2>Modificar Saldo del Usuario:</h2>
-                        
                         <div>
-                        <input className='form-control' type="number" min={0} onChange={(e) => setSaldoUpdate(e.target.value)} value={saldoUpdate}/>
-                        <button className='modal-btn' onClick={() => updateUser()}>Guardar</button>
-                        <button className='modal-btn' onClick={() => setModalUpdate(false)}>Cerrar</button>
+                            <input className='form-control' type="number" min={0} onChange={(e) => setSaldoUpdate(e.target.value)} value={saldoUpdate}/>
+                            <button className='modal-btn' onClick={() => updateUser()}>Guardar</button>
+                            <button className='modal-btn' onClick={() => setModalUpdate(false)}>Cerrar</button>
                         </div>
                     </div>
                 </Portal>
@@ -133,8 +134,8 @@ const Crear = () => {
                                 <div><span>Nombre: {v.name}</span></div>
                                 <div><span>usuario: {v.user} | Clave: {v.pass} | Saldo: {v.saldo}</span></div>
                             </div>
-                            <div className='delete' title='Eliminar' onClick={()=>handleDelete(v._id)}>❌</div>
-                            <div className='update' title='Modificar Saldo' onClick={()=>handleUpdate(v._id)}>💰</div>
+                            <div className='delete' title='Eliminar' onClick={()=>handleDelete(v._id)}><img className='img-borrar' src={borrar}/></div>
+                            <div className='update' title='Modificar Saldo' onClick={()=>handleUpdate(v._id)}><img className='img-update' src={bolsa}/></div>
                         </div>
                     ))}
                     

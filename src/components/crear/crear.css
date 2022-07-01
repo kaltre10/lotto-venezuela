@@ -38,6 +38,11 @@
     margin: 0;
 }
 
+.crear .img-update, .crear .img-borrar{
+    width: 40px;
+}   
+
+
 .crear .delete:hover, .crear .update:hover{
     background-color: aquamarine;
 }

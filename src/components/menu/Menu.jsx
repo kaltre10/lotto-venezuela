@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom'; 
 import { UserContex } from '../../context/DataUserContext';
+import bolsa from '../../img/bolsa.png';
 import './menu.css';
 
 
@@ -37,7 +38,12 @@ const Menu = () => {
                     <li><NavLink to='/vender'>Vender</NavLink></li>
                     <li><NavLink to='/resultados'>Resultados</NavLink></li>
                     <li><NavLink to='/reportes'>Reportes</NavLink></li>
-                    <li><span className='saldo'>💰 {dataContext.user.saldo} Bs</span><a href='#' onClick={() => handleClose()}>Cerrar</a></li>
+                    <li className='container-saldo'>
+                        <span className='saldo'>
+                            <img className='img' src={bolsa}/> {dataContext.user.saldo} Bs
+                        </span>
+                        <a href='#' onClick={() => handleClose()}>Cerrar</a>
+                    </li>
                 </ul>
             </nav> 
         )
