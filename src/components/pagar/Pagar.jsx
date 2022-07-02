@@ -4,6 +4,7 @@ import useGetUser from '../../hooks/useGetUser';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import Portal from '../portal/Portal';
+import animal from '../../helpers/dataAnimal';
 import './pagar.css';
 
 const Pagar = () => {
@@ -95,7 +96,10 @@ const Pagar = () => {
                     <span>Paga: <br />{ticket.data[0].premio}</span>
                     <div>
                         {ticket.data[0].numbers.map((d, index) => (
-                            <div key={index}>Numero: {d} | name</div>
+                            <>
+                            {console.log(animal)}
+                            <div key={index}>Numero: {d} | {animal.map(a => a.number == d ? a.name : null)}</div>
+                            </>
                         ))}
                     </div>
                     <div>
