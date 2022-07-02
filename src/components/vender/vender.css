@@ -153,6 +153,10 @@ h2{
     border-radius: 25px;
 }
 
+.vender .img-borrar{
+    width: 30px;
+}
+
 
 @media (max-width: 460px){
     .table-selection{

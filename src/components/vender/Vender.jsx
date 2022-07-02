@@ -9,6 +9,8 @@ import Menu from '../menu/Menu';
 import animal from '../../helpers/dataAnimal';
 import Loader from '../loader/Loader';
 import Portal from '../portal/Portal';
+import borrar from '../../img/delete.png';
+
 
 const Vender = () => {
 
@@ -198,7 +200,7 @@ const Vender = () => {
                         <li key={ticket.number}>
                             <span>Numero: </span>
                             <span>{ticket.number}</span>
-                            <span className='delete' onClick={() => handleDelete(ticket.number)}>❌</span>
+                            <span className='delete' onClick={() => handleDelete(ticket.number)}><img className='img-borrar' src={borrar}/></span>
                         </li>
                     ))}
                     </ul>
