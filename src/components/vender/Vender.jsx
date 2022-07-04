@@ -31,7 +31,7 @@ const Vender = () => {
     ]);
     const [lastTicket, setLastTicket] = useState({
         count: 0,
-        numbers: [],
+        numbers: { number: '' },
         hora: null,
         date: null
     });
@@ -82,7 +82,7 @@ const Vender = () => {
         setLoad(true);
         const data = {
             token: localStorage.getItem('lotto').replaceAll('"', ''),
-            numbers: ticket.map( t => t.number).flat(),
+            numbers: ticket.map( t => {t.status = false; return t}),
             pago
         }
         const query = await api(`${URL}/api/v1/ventas`, {ticket:data}, 'POST')
@@ -136,7 +136,7 @@ const Vender = () => {
         setModal({message: "", status: false});
         setLastTicket({
             count: 0,
-            numbers: [],
+            numbers: { number: '' },
             hora: null,
             date: null
         });
@@ -160,11 +160,11 @@ const Vender = () => {
                         <li className='li'># {lastTicket.count} | Hora: {lastTicket.hora}</li>
                         <li className='li'>Fecha: {lastTicket.date}</li>
                         <li className='li'><b>Números:</b></li>
-                        <li className='li'># {lastTicket.numbers[0]} | {animal.filter( a => a.number == lastTicket.numbers[0])[0].name}</li>
-                        <li className='li'># {lastTicket.numbers[1]} | {animal.filter( a => a.number == lastTicket.numbers[1])[0].name}</li>
-                        <li className='li'># {lastTicket.numbers[2]} | {animal.filter( a => a.number == lastTicket.numbers[2])[0].name}</li>
-                        <li className='li'># {lastTicket.numbers[3]} | {animal.filter( a => a.number == lastTicket.numbers[3])[0].name}</li>
-                        <li className='li'># {lastTicket.numbers[4]} | {animal.filter( a => a.number == lastTicket.numbers[4])[0].name}</li>
+                        <li className='li'># {lastTicket.numbers[0].number} | {animal.filter( a => a.number == lastTicket.numbers[0].number)[0].name}</li>
+                        <li className='li'># {lastTicket.numbers[1].number} | {animal.filter( a => a.number == lastTicket.numbers[1].number)[0].name}</li>
+                        <li className='li'># {lastTicket.numbers[2].number} | {animal.filter( a => a.number == lastTicket.numbers[2].number)[0].name}</li>
+                        <li className='li'># {lastTicket.numbers[3].number} | {animal.filter( a => a.number == lastTicket.numbers[3].number)[0].name}</li>
+                        <li className='li'># {lastTicket.numbers[4].number} | {animal.filter( a => a.number == lastTicket.numbers[4].number)[0].name}</li>
                     </ul>
                 </div>
                 <button className='btn' onClick={() => handleSave()}>Continuar</button>

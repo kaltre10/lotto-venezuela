@@ -92,14 +92,14 @@ const Ventas = () => {
                     users.map(u => (
                         <div className='vendedor'>
                         <div className='vendedor-vendedor'>{u.user}</div>
-                        <div className='vendedor-ventas'>{ventasUser.length > 0 ? ventasUser.filter( v => v.user == u.user)[0].ventas : 0}</div>
-                        <div className='vendedor-premios'>{ventasUser.length > 0 ? ventasUser.filter( v => v.user == u.user)[0].premio : 0}</div>
+                        <div className='vendedor-ventas'>{ventasUser.length > 0 ? (ventasUser.filter( v => v.user == u.user)[0].ventas).toFixed(2) : 0}</div>
+                        <div className='vendedor-premios'>{ventasUser.length > 0 ? (ventasUser.filter( v => v.user == u.user)[0].premio).toFixed(2) : 0}</div>
                         <div className='vendedor-queda'>
                         {
                             ventasUser.length > 0 
                             ?
-                            ventasUser.filter( v => v.user == u.user)[0].ventas -
-                            ventasUser.filter( v => v.user == u.user)[0].premio
+                            (ventasUser.filter( v => v.user == u.user)[0].ventas -
+                            ventasUser.filter( v => v.user == u.user)[0].premio).toFixed(2)
                             : 0
                         }</div>
                     </div>

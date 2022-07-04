@@ -22,9 +22,12 @@ const Ticket = ({data}) => {
             <span>Aciertos: {data.aciertos}</span>
             <span>Pago: {data.pago == 0 ? "Efectivo" : "Saldo"}</span>
             <div>
-                {data.numbers.map((d, index) => (
-                    <div style={{display: 'flex', alignItems: 'flex-start'}} key={index}>Numero: {d} | {dataAnimal.filter(a=> a.number == d && a.name )[0].name}</div>
-                ))}
+                {data.numbers.map((d, index) => (<>
+                    <div style={{display: 'flex', alignItems: 'flex-start'}} key={index}>Numero: {d.number} | {
+                        dataAnimal.filter( a => (a.number == d.number) && a.name)[0].name
+                    } 
+                    </div>
+                    </>))}
             </div>
         </div>
     )

@@ -97,8 +97,8 @@ const Pagar = () => {
                     <div>
                         {ticket.data[0].numbers.map((d, index) => (
                             <>
-                            {console.log(animal)}
-                            <div key={index}>Numero: {d} | {animal.map(a => a.number == d ? a.name : null)}</div>
+                            {console.log(d)}
+                            <div key={index}>Numero: {d.number} | {animal.filter(a => a.number == d.number)[0].name}</div>
                             </>
                         ))}
                     </div>
