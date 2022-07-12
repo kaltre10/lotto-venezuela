@@ -7,14 +7,25 @@ const UserContex = createContext();
 const DataUserContext = props => {
 
     let navigate = useNavigate();
-    const [ dataContext, setDataContext ] = useState({ user: { id: null, level: 0, saldo: 0 }});
+    const [ dataContext, setDataContext ] = useState({ 
+                                                    user: { 
+                                                        id: null,
+                                                        level: 0, 
+                                                        saldo: 0,
+                                                        pay: 0
+                                                    }});
       
     
     useEffect(() => {
         (async () => {
             if(!dataContext.user.id){
                 let user = await useGetUser();  
-                setDataContext({ user: { id: user.id, level: user.level, saldo: user.saldo }})
+                setDataContext({ user: { 
+                    id: user.id, 
+                    level: user.level, 
+                    saldo: user.saldo,
+                    pay: user.pay
+                 }})
             }else{
                 navigate('login');
             }

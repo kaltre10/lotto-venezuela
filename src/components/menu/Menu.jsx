@@ -12,7 +12,7 @@ const Menu = () => {
     let navigate = useNavigate();
 
     const handleClose = () => {
-        setDataContext({ user: {id: null, level: 0, saldo: 0}})
+        setDataContext({ user: {id: null, level: 0, saldo: 0, pay: 0}})
         localStorage.removeItem('lotto')
         navigate('/login');
     }

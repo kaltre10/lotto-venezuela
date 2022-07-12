@@ -12,9 +12,9 @@ const useGetUser = async () => {
     if(token){
         const response = await api(`${URL}/api/v1/auth/verify`, {token}, 'POST');
         user = await response.json();
-        user = { id: user.data.id, level: user.data.level, saldo: user.data.saldo}
+        user = { id: user.data.id, level: user.data.level, saldo: user.data.saldo, pay: user.data.pay}
     }else{
-        user = { id: null, level: 0, saldo: 0}
+        user = { id: null, level: 0, saldo: 0, pay: 0}
     }
 
     return user;

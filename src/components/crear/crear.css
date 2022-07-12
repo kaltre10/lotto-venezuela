@@ -47,6 +47,10 @@
     background-color: aquamarine;
 }
 
+.select{
+    background-color: #171826 !important;
+}
+
 .modal-card {
     width: 300px;
     display: grid;

@@ -22,7 +22,6 @@ const Jugadas = () => {
         setLoad(true);
         const query = await fetch(`${URL}/api/v1/ventas/${date}`);
         const data = await query.json();
-        console.log(data)
         setLoad(false);
         setJugadas(data.data);
     }
@@ -53,7 +52,7 @@ const Jugadas = () => {
                 {jugadas.length > 0 && (
                     jugadas.map( j => (
                         <div key={j._id} className='jugada-item'>
-                            <div className='hora'>HORA: </div><div className='jugada-head-item hora-item'>{getTime(j.date)}</div>
+                            <div className='hora'>HORA: </div><div className='jugada-head-item hora-item'>{getTime(j.createdAt)}</div>
                             <div className='user'>USUARIO: </div><div className='jugada-head-item user-item'>{j.user.user}</div>
                             <div className='jugada-i'>JUGADAS: </div><div className='jugada-head-item jugada-it'>{j.numbers.map( n => (`${n.number} `))}</div>
                             <div className='aciertos'>ACIERTOS: </div><div className='jugada-head-item aciertos-item'>{j.aciertos}</div>

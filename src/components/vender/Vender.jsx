@@ -51,6 +51,11 @@ const Vender = () => {
         })();
     }, []);
 
+    const verifyOptionPay = (pay) => {
+        if(pay == 1) setOptions([{ value: 0, name: 'Efectivo' }]);
+        if(pay == 2) setOptions([{ value: 1, name: 'Saldo' }]);
+    }
+
 
     const getAciertos = async () => {
         const query = await fetch(`${URL}/api/v1/premios`);
@@ -79,6 +84,14 @@ const Vender = () => {
 
     const handleClick = async () => {
         setLoad(true);
+        
+        //validate hours
+        let today = new Date();
+        if(today.getHours() > 19){
+            setModalError({message: "Se ha terminado el tiempo de venta", status: true});
+            return;
+        }
+
         const data = {
             token: localStorage.getItem('lotto').replaceAll('"', ''),
             numbers: ticket.map( t => {t.status = false; return t}),
@@ -119,16 +132,19 @@ const Vender = () => {
             if(!user.id){
                 navigate('/login');
             }
-            setDataContext({ user: { id: user.id, level: user.level, saldo: user.saldo}});
+            setDataContext({ user: { id: user.id, level: user.level, saldo: user.saldo, pay: user.pay}});
             if(user.level == 1) {
                 navigate('/ventas');
             }
+
+            //verificamos forma de pago del usuario
+            verifyOptionPay(user.pay);
         }
     }
 
     const checkSaldo = async () => {
         let user = await useGetUser();  
-        setDataContext({ user: { id: user.id, level: user.level, saldo: user.saldo}});
+        setDataContext({ user: { id: user.id, level: user.level, saldo: user.saldo, pay: user.pay}});
     }
 
     const handleSave = () => {
@@ -175,7 +191,7 @@ const Vender = () => {
         <div className='modal-error'>
             <div className='container'>
                 <h3>{modalError.message}</h3>
-                <button className='btn' onClick={() => setModalError(false)}>Cerrar</button>
+                <button className='btn' onClick={() => {setModalError(false); setLoad({message: "", status: false}); setLoad(false)}}>Cerrar</button>
             </div>
         </div>}
 
