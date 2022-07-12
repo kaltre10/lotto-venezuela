@@ -158,10 +158,10 @@ const Vender = () => {
     }
 
     const descriptionPremios = {
-        1: "4to Lugar (3 Aciertos)",
-        2: "3er Lugar (4 Aciertos)",
-        3: "2do Lugar (5 Aciertos)",
-        4: "1er Lugar (6 Aciertos) ",
+        1: "4to Lugar |",
+        2: "3er Lugar |",
+        3: "2do Lugar |",
+        4: "1er Lugar |",
     }
     
     return ( 

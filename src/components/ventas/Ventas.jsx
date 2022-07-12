@@ -16,6 +16,11 @@ const Ventas = () => {
     const [ hasta, setHasta ] = useState(toDay);
     const [ allVentas, setAllVentas ] = useState([]);
     const [ users, setUsers ] = useState([]);
+    const [ premios, setPremios ] = useState([]);
+    const [sumaPremio, setSumaPremio ] = useState(0);
+
+    const ventasUser = [];
+    let sumaVentas = 0;
 
     useEffect(() => {
         ( async() => {
@@ -24,8 +29,23 @@ const Ventas = () => {
                 navigate('/login');
             }
             getVentas();
+            getPremios();
+            
         })();
     }, []);
+
+    const getPremios = async () => {
+        // const token = localStorage.getItem('lotto').replaceAll('"', '');
+        const query = await fetch(`${URL}/api/v1/premios`);
+        const dataPremios =  await query.json();
+        let suma = 0;
+        dataPremios.data.forEach( (p) => {
+            suma += p.premio;
+            setSumaPremio( suma );
+        })
+        // console.log(sumaPremio);
+        // setPremios([ ...premios, dataPremios.data[0]]);
+    }
 
     const getVentas = async () => {
         const token = localStorage.getItem('lotto').replaceAll('"', '');
@@ -43,9 +63,7 @@ const Ventas = () => {
         
     });
 
-    const ventasUser = [];
-    let sumaVentas = 0;
-    let sumaPremio = 0;
+   
 
     allVentas.forEach((ventas, index) => {
         
@@ -65,10 +83,12 @@ const Ventas = () => {
                 }
             })
             sumaVentas = sumaVentas + ventas.precio;
-            sumaPremio = sumaPremio + ventas.premio;
+            // sumaPremio = sumaPremio + ventas.premio;
         }
 
-    })
+    });
+
+    
     
     return ( 
         <div className='ventas'>

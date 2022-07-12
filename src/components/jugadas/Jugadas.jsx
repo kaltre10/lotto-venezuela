@@ -44,6 +44,7 @@ const Jugadas = () => {
             <button className='form-control' onClick={() => getJugadas()}>Consultar</button></div>
             <div className='jugada'>
                 <div className='jugada-head'>
+                    <div className='jugada-head-item'>#ID</div>
                     <div className='jugada-head-item'>HORA</div>
                     <div className='jugada-head-item'>USUARIO</div>
                     <div className='jugada-head-item'>COMBINACION JUGADA</div>
@@ -52,6 +53,7 @@ const Jugadas = () => {
                 {jugadas.length > 0 && (
                     jugadas.map( j => (
                         <div key={j._id} className='jugada-item'>
+                             <div className='id'>#ID: </div><div className='jugada-head-item id-item'>{j.count}</div>
                             <div className='hora'>HORA: </div><div className='jugada-head-item hora-item'>{getTime(j.createdAt)}</div>
                             <div className='user'>USUARIO: </div><div className='jugada-head-item user-item'>{j.user.user}</div>
                             <div className='jugada-i'>JUGADAS: </div><div className='jugada-head-item jugada-it'>{j.numbers.map( n => (`${n.number} `))}</div>

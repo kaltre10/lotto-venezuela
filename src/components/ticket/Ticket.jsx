@@ -16,8 +16,8 @@ const Ticket = ({data}) => {
         <div className="ticket">
             <span>#{data.count}</span>
             <span>hora: {`${time.getHours()}:${time.getMinutes()}`}</span>
-            <span>{status[data.status]}</span>
-            <span>Premio: {data.premio}</span>
+            {/* <span>{status[data.status]}</span> */}
+            {/* <span>Premio: {data.premio}</span> */}
             <span>Precio: {data.precio}</span>
             <span>Aciertos: {data.aciertos}</span>
             <span>Pago: {data.pago == 0 ? "Efectivo" : "Saldo"}</span>

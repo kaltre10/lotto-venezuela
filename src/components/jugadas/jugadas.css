@@ -60,7 +60,8 @@
         text-align: left;
         display: grid;
         width: 80%;
-        grid-template-areas: "hora hora-item"
+        grid-template-areas: "id id-item"
+                             "hora hora-item"
                              "user user-item"
                              "jugada-i jugada-it"
                              "aciertos aciertos-item";
@@ -69,6 +70,7 @@
  
 }
 
+    .id{ grid-area: id;}
     .hora{ grid-area: hora;}
     .hora-item{ grid-area: "hora-item"; }
     .user{ grid-area: user }
@@ -79,6 +81,7 @@
     .aciertos-item{ grid-area: "aciertos-item"}
 
 @media (min-width: 850px) {
+    .id,
     .hora,
     .user,
     .jugada-i,

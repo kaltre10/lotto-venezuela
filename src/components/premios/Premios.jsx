@@ -67,10 +67,10 @@ const Premios = () => {
     }
 
     const descriptionPremios = {
-        1: "4to Lugar con 3 Aciertos ",
-        2: "3er Lugar con 4 Aciertos",
-        3: "2do Lugar con 5 Aciertos",
-        4: "1er Lugar con 6 Aciertos"
+        1: "4to Lugar ",
+        2: "3er Lugar ",
+        3: "2do Lugar ",
+        4: "1er Lugar "
     }
 
     return ( 
@@ -115,7 +115,7 @@ const Premios = () => {
             <h2>Precio</h2>
             <div className='card-container'>
                 <div className='card'>
-                    <p>Precio actual del ticket: {precio}</p>
+                    <p>Precio Actual del Ticket: {precio}</p>
                     <button onClick={() => setModalPrecio(true)}>Actualizar</button>
                 </div>
             </div>
