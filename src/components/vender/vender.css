@@ -12,7 +12,7 @@ h2{
 .table-selection{
     width: 550px;
     height: 550px;
-    background-color: #34495e;
+    background-color: #1b1e2c;
     border-radius: 25px;
     padding: 10px;
     display: flex;
@@ -24,7 +24,7 @@ h2{
 .form-selection{
     width: 550px;
     height: 550px;
-    background-color: #34495e;
+    background-color: #1b1e2c;
     border-radius: 25px;
     padding: 10px;  
     position: relative;
@@ -45,14 +45,18 @@ h2{
 .table-selected ul{
    margin: 0 auto;
    padding: 0;
+   gap: 5px;
 }
 
 .table-selected li{
-    padding: 10px;
-    background-color: #2c3e50;
+    margin-bottom: 1px;
+    padding: 3px;
+    background-color: #222532;;
     list-style: none;
     display: flex;
     justify-content: space-between;
+    border-radius: 5px;
+    margin-top: 1px;
 }
 
 .form-selection .delete{
@@ -67,7 +71,7 @@ h2{
     border: none;
     margin-top: 10px;
     cursor: pointer;
-    background-color: #3867d6;
+    background-color: #f39c12;
     color: white;
     position: absolute;
     padding-bottom: 20px;
@@ -116,7 +120,7 @@ h2{
 .modal-error .container{
     display: flex;
     flex-direction: column;
-    background-color: #34495e;
+    background-color: #222532;
     padding: 30px;
     border-radius: 25px;
 }
@@ -127,6 +131,12 @@ h2{
 
 .modal-error .btn{
     cursor: pointer;
+    border-radius: 25px;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #f39c12;
 }
 
 .vender .ticket{
@@ -136,6 +146,7 @@ h2{
     color: #000;
     display: flex;
     text-align: start;
+    padding-bottom: 50px
 }
 
 .vender .ul{

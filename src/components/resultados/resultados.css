@@ -20,6 +20,11 @@
     cursor: pointer;
 }
 
+.resultados .form-control .btn{
+    font-size: 16px;
+    background-color: #f39c12;
+}
+
 @media (max-width: 460px){
     .resultados .container{
         width: 100%;

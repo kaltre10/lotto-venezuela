@@ -1,21 +1,54 @@
 .login{
     display: flex;
-    flex-direction: column;
     height: 100vh;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    
+}
+
+.login .picture{
+    /* width: 60%;
+    height: 100vh;
+    background-color:rgb(67, 69, 184);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+.login .picture-img{
+    width: 100%;
+    max-width: 130px;
+    margin-top: -30px;
+    margin-bottom: -30px;
+}
+
+.login .container{
+    display: flex;
+    margin: 0 auto;
+    position: relative;
 }
 
 .login .container-login{
-    background-color: #34495e;
-    padding: 30px;
-    border-radius: 25px;
+    display: flex;
+    margin: 0 auto;
+    width: 40%;
+    
 }
 
 .login .form{
     display: flex;
     flex-direction: column;
     gap: 10px 0;
+    background-color: #1b1e2c;
+    padding: 30px;
+    border-radius: 25px;
+    text-align: left;
+    color: #ffffffe6;
+}
+
+.form h2{
+    text-align: center;
 }
 
 .login .input{
@@ -23,6 +56,8 @@
     width: 250px;
     border-radius: 25px;
     border: none;
+    background-color: #222532;
+    color: #ffffffe6;
 }
 
 .login .invalid{
@@ -33,7 +68,10 @@
     cursor: pointer;
     border-radius: 25px;
     border: none;
-    padding: 3px;
+    padding: 8px;
+    background-color: #f39c12;
+    font-weight: 700;
+    font-size: 14px;
 }
 
 .modal .container{

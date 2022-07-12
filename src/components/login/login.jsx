@@ -2,6 +2,7 @@ import {useState} from 'react';
 import api from '../../services/api';
 import Portal from '../portal/Portal';
 import Loader from '../loader/Loader';
+import logo from '../../img/logo-polla.png';
 import { useNavigate } from "react-router-dom";
 import './login.css';
 
@@ -60,16 +61,17 @@ const Login = () => {
                     }
                 </Portal>
             )}
-            
+
             <div className='container-login'>
-                <h2>Lotto Venezuela</h2>
+                
                 <div className='container'>
                     <form className='form' onSubmit={e => handleSubmit(e)}>
-                        <label>Name:</label>
+                        <h2><img className='picture-img' src={logo} alt='Login Polla Millonaria' /></h2>
+                        <label>Nombre:</label>
                         <input className='input' type="text" onChange={e => handleChange(e)} name="user" autoComplete='off' required/>
                         <label>Contraseña:</label>
                         <input className='input' type="password" onChange={e => handleChange(e)} name="pass" autoComplete='off' required/>
-                        <button className='btn'>Entrar</button>
+                        <button className='btn'>ENTRAR</button>
                     </form>
                 </div>  
             </div>

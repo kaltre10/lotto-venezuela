@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react';
-import Menu from '../menu/Menu';
 import Ticket from '../ticket/Ticket';
 import { UserContex } from '../../context/DataUserContext';
 import useGetUser from '../../hooks/useGetUser';
@@ -7,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import Loader from '../loader/Loader';
 import Portal from '../portal/Portal';
+import Menu from '../menu/Menu';
 import './reportes.css';
 
 const Reportes = () => {

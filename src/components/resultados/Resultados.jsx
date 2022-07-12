@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import Menu from '../menu/Menu';
 import CardResultados from '../cardResultados/CardResultados';
 import useGetUser from '../../hooks/useGetUser';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import Loader from '../loader/Loader';
 import Portal from '../portal/Portal';
+import Menu from '../menu/Menu';
 import './resultados.css';
 const Resultados = () => {
 
@@ -37,7 +37,6 @@ const Resultados = () => {
             getResultados();
         })();
     }, []);
-
     
     const getResultados = async () => {
         setLoad(true);
@@ -63,11 +62,10 @@ const Resultados = () => {
     return ( 
         <div className='resultados'>
             {load && <Portal><Loader /></Portal>}
-
             <Menu />
             <h2>Resultados:</h2>
             <div><input className='form-control' type="date" value={day} onChange={e => setDay(e.target.value)} />
-            <button className='form-control' onClick={() => getResultados()}>Consultar</button></div>
+            <button className='form-control btn' onClick={() => getResultados()}>Consultar</button></div>
             <div className='container'>
                 {resultados.map( r => (
                     <CardResultados key={r.number} data={r}/>

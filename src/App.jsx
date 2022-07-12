@@ -10,10 +10,12 @@ import Crear from './components/crear/Crear';
 import CargarResultados from './components/cargarResultados/CargarResultados';
 import Pagar from './components/pagar/Pagar';
 import Premios from './components/premios/Premios';
+import Jugadas from './components/jugadas/Jugadas';
 import { DataUserContext } from './context/DataUserContext';
 import { Routes, Route } from "react-router-dom";
 
 function App() {
+
   return (
     <div className="App">
       <DataUserContext>
@@ -28,6 +30,7 @@ function App() {
           <Route path="/resultados-crear" element={<CargarResultados/>} />
           <Route path="/pagar" element={<Pagar/>} />
           <Route path="/premios" element={<Premios/>} />
+          <Route path="/jugadas" element={<Jugadas/>} />
           <Route path="/login" element={<Login/>} />
         </Routes>
       </DataUserContext>

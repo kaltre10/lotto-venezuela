@@ -10,7 +10,7 @@ const Card = ({data, handleChange, ticket}) => {
     }
 
     const handleClick = (number) => {
-        if(ticket.length < 5){
+        if(ticket.length < 6){
             handleChange(number);
             setSelected(true);
         }

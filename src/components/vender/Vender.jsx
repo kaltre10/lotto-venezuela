@@ -5,11 +5,11 @@ import useGetUser from '../../hooks/useGetUser';
 import { useNavigate } from "react-router-dom";
 import api from '../../services/api';
 import Card from '../card/Card';
-import Menu from '../menu/Menu';
 import animal from '../../helpers/dataAnimal';
 import Loader from '../loader/Loader';
 import Portal from '../portal/Portal';
 import borrar from '../../img/delete.png';
+import Menu from '../menu/Menu';
 
 
 const Vender = () => {
@@ -17,7 +17,6 @@ const Vender = () => {
     let navigate = useNavigate();
 
     const selectInputRef = useRef();
-
     const [ticket, setTicket] = useState([]);
     const [modal, setModal] = useState({message : '', status: false});
     const [modalError, setModalError] = useState({message : '', status: false});
@@ -67,7 +66,7 @@ const Vender = () => {
     }
 
     const handleChange = (data) => {
-        if(ticket.length < 5) setTicket([ 
+        if(ticket.length < 6) setTicket([ 
             ...ticket, { 
                         number: animal.filter(a => a.number == data)[0].number,
                         name: animal.filter(a => a.number == data)[0].name
@@ -144,8 +143,8 @@ const Vender = () => {
     
     return ( 
     <div className='vender'>
+        <Menu />
         {load && <Portal><Loader /></Portal>}
-
         {modal.status &&
         <div className='modal-error'>
             <div className='container'>
@@ -156,7 +155,7 @@ const Vender = () => {
                     <p>Fecha: 21/06/2022</p>
                     <b>Números:</b> */}
                     <ul className='ul'> 
-                        <li className='li'><b>Mega Lotto Venezuela</b></li>
+                        <li className='li'><b>Polla Millonaria</b></li>
                         <li className='li'># {lastTicket.count} | Hora: {lastTicket.hora}</li>
                         <li className='li'>Fecha: {lastTicket.date}</li>
                         <li className='li'><b>Números:</b></li>
@@ -165,9 +164,10 @@ const Vender = () => {
                         <li className='li'># {lastTicket.numbers[2].number} | {animal.filter( a => a.number == lastTicket.numbers[2].number)[0].name}</li>
                         <li className='li'># {lastTicket.numbers[3].number} | {animal.filter( a => a.number == lastTicket.numbers[3].number)[0].name}</li>
                         <li className='li'># {lastTicket.numbers[4].number} | {animal.filter( a => a.number == lastTicket.numbers[4].number)[0].name}</li>
+                        <li className='li'># {lastTicket.numbers[5].number} | {animal.filter( a => a.number == lastTicket.numbers[5].number)[0].name}</li>
                     </ul>
                 </div>
-                <button className='btn' onClick={() => handleSave()}>Continuar</button>
+                <button className='btn' onClick={() => handleSave()}>CONTINUAR</button>
             </div>
         </div>}
 
@@ -179,8 +179,8 @@ const Vender = () => {
             </div>
         </div>}
 
-        <Menu />
-        <h2>Mega Lotto Venezuela</h2>
+        {/* <Menu /> */}
+        <h2>Polla Millonaria</h2>
         <div className='container'>
             <div className="table-selection">
                 {animal.map(animal => (
@@ -222,8 +222,8 @@ const Vender = () => {
                     </select>            
                 </div>
                 <button 
-                    className={ticket.length < 5 ? 'btn-disabled' : undefined}
-                    disabled = {ticket.length < 5 ? true : false}
+                    className={ticket.length < 6 ? 'btn-disabled' : undefined}
+                    disabled = {ticket.length < 6 ? true : false}
                     onClick={() => handleClick()}
                 >Guardar</button>
             </div>

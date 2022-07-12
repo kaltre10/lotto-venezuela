@@ -28,6 +28,7 @@ const Menu = () => {
                     <li><NavLink to='/resultados-crear'>Resultados</NavLink></li>
                     <li><NavLink to='/pagar'>Pagar/Anular</NavLink></li>
                     <li><NavLink to='/premios'>Premios/Precio</NavLink></li>
+                    <li><NavLink to='/jugadas'>Jugadas</NavLink></li>
                     <li><a href='#' onClick={() => handleClose()}>Cerrar</a></li>
                 </ul>
             </nav> 
@@ -38,6 +39,7 @@ const Menu = () => {
                     <li><NavLink to='/vender'>Vender</NavLink></li>
                     <li><NavLink to='/resultados'>Resultados</NavLink></li>
                     <li><NavLink to='/reportes'>Reportes</NavLink></li>
+                    <li><NavLink to='/jugadas'>Jugadas</NavLink></li>
                     <li className='container-saldo'>
                         <span className='saldo'>
                             <img className='img' src={bolsa}/> {dataContext.user.saldo} Bs
