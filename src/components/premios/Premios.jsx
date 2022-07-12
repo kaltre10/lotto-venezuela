@@ -67,10 +67,10 @@ const Premios = () => {
     }
 
     const descriptionPremios = {
-        1: "2 ",
-        2: "3 ",
-        3: "4 ",
-        4: "5 "
+        1: "4to Lugar con 3 Aciertos ",
+        2: "3er Lugar con 4 Aciertos",
+        3: "2do Lugar con 5 Aciertos",
+        4: "1er Lugar con 6 Aciertos"
     }
 
     return ( 
@@ -105,7 +105,7 @@ const Premios = () => {
                 {premios.length > 0 && 
                 premios.map(premio => (
                     <div className='card' key={premio._id}>
-                        <h5>{descriptionPremios[premio.type]} Aciertos</h5>
+                        <h5>{descriptionPremios[premio.type]}</h5>
                         <p>Premio: {premio.premio}</p>
                         <button 
                             onClick={() => handleInput(premio.type)}>Actualizar</button>

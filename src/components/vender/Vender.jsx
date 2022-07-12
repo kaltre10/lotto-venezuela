@@ -156,6 +156,13 @@ const Vender = () => {
             date: null
         });
     }
+
+    const descriptionPremios = {
+        1: "4to Lugar (3 Aciertos)",
+        2: "3er Lugar (4 Aciertos)",
+        3: "2do Lugar (5 Aciertos)",
+        4: "1er Lugar (6 Aciertos) ",
+    }
     
     return ( 
     <div className='vender'>
@@ -225,7 +232,7 @@ const Vender = () => {
                 <div className='aciertos'>
                     {aciertos.length > 0 && (
                         aciertos.map(acierto => (
-                            <span key={acierto._id} className='acierto'>{acierto.type + 1} Aciertos: {acierto.premio}</span>
+                            <span key={acierto._id} className='acierto'>{descriptionPremios[acierto.type]} Premio: {acierto.premio}</span>
                         ))
                     )}
                 </div>
