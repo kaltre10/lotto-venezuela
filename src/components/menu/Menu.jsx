@@ -36,7 +36,7 @@ const Menu = () => {
         :(
             <nav className='menu'>
                 <ul>
-                    <li><NavLink to='/vender'>Vender</NavLink></li>
+                    <li><NavLink to='/vender'>Apostar</NavLink></li>
                     <li><NavLink to='/resultados'>Resultados</NavLink></li>
                     <li><NavLink to='/reportes'>Reportes</NavLink></li>
                     <li><NavLink to='/jugadas'>Jugadas</NavLink></li>
