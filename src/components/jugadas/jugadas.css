@@ -34,6 +34,24 @@
     cursor: pointer;
 }
 
+.jugadas .premios{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.jugadas .premio-item{
+    padding: 20px;
+    background-color: #1b1e2c;
+    border-radius: 25px;
+    border-left: 4px solid #f39c12;
+    border-right: 4px solid #f39c12;
+}
+
 
 
 @media (max-width: 1200px) {
