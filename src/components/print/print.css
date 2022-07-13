@@ -7,9 +7,11 @@
     body{
         height: auto !important;
         font-size: 14px;
+        color: #000;
     }
     .vender{
         display: none;
+        color: #000;
     }
     
     .print{
@@ -25,6 +27,7 @@
         /* place-items: center;  */
         text-align: left !important;
         margin-left: 25px !important;
+        color: #000;
     }
     
     .modal_print{
@@ -33,6 +36,7 @@
         background-color: white;
         display: grid;
         position: relative;
+        color: #000;
     }
     
     .separador{
