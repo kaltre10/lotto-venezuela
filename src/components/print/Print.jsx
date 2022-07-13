@@ -9,10 +9,10 @@ const Print = ({data, animal}) => {
             <div>
                 <div>
                     <p>Polla Millonaria</p>
-                    <span className="separador">
+                    
                     <span># {lastTicket.count} </span><span className="left"> | Hora: {lastTicket.hora}</span><br />
                     <span># Fecha: {lastTicket.date} </span><br />                  
-                    </span>
+                    
                     -------------------------------------<br />
                     BOLETA DE VENTA ELECTRÓNICA<br />
                     -------------------------------------<br />

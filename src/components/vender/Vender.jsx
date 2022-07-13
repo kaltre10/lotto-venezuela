@@ -96,7 +96,7 @@ const Vender = () => {
 
         //validate hours
         let today = new Date();
-        if(today.getHours() > 22){
+        if(today.getHours() > 20){
             setModalError({message: "Se ha terminado el tiempo de venta", status: true});
             return;
         }
