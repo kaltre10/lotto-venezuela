@@ -52,8 +52,14 @@ const Vender = () => {
     }, []);
 
     const verifyOptionPay = (pay) => {
-        if(pay == 1) setOptions([{ value: 0, name: 'Efectivo' }]);
-        if(pay == 2) setOptions([{ value: 1, name: 'Saldo' }]);
+        if(pay == 1) {
+            setOptions([{ value: 0, name: 'Efectivo' }]);
+            setPago(0);
+        };
+        if(pay == 2) {
+            setOptions([{ value: 1, name: 'Saldo' }])
+            setPago(1);
+        };
     }
 
 
@@ -87,7 +93,7 @@ const Vender = () => {
         
         //validate hours
         let today = new Date();
-        if(today.getHours() > 21){
+        if(today.getHours() > 22){
             setModalError({message: "Se ha terminado el tiempo de venta", status: true});
             return;
         }
@@ -97,6 +103,7 @@ const Vender = () => {
             numbers: ticket.map( t => {t.status = false; return t}),
             pago
         }
+ 
         const query = await api(`${URL}/api/v1/ventas`, {ticket:data}, 'POST')
         const response = await query.json();
         if(query.status == 200){
