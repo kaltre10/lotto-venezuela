@@ -7,6 +7,7 @@ import api from '../../services/api';
 import Card from '../card/Card';
 import animal from '../../helpers/dataAnimal';
 import Loader from '../loader/Loader';
+import Print from '../print/Print';
 import Portal from '../portal/Portal';
 import borrar from '../../img/delete.png';
 import Menu from '../menu/Menu';
@@ -24,6 +25,7 @@ const Vender = () => {
     const [precio, setPrecio] = useState(0);
     const [pago, setPago] = useState(0);
     const [load, setLoad] = useState(true);
+    // const [ statePrint, setStatePrint] = useState(false);
     const [options, setOptions] = useState( [
         { value: 0, name: 'Efectivo' },
         { value: 1, name: 'saldo' },
@@ -90,7 +92,8 @@ const Vender = () => {
 
     const handleClick = async () => {
         setLoad(true);
-        
+        // setStatePrint(true);
+
         //validate hours
         let today = new Date();
         if(today.getHours() > 22){
@@ -108,29 +111,34 @@ const Vender = () => {
         const response = await query.json();
         if(query.status == 200){
             setTicket([])
-            setModal({message:"Ticket Guardado", status: true});
+         
 
+            setModal({message:"Ticket Guardado", status: true});
+            
             //ajustar fecha para mostrar en el ticket
             let date = new Date(response.data.createdAt);
             let hora = `${date.getHours()}:${date.getMinutes()}`;
             let d = String(date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0'));
+           
             setLastTicket({
                 count: response.data.count,
                 numbers: response.data.numbers,
                 hora,
                 date: d
             });
-
+           
             //reinicar options
             selectInputRef.current[0].selected = true;
 
             //check saldo 
             checkSaldo();
             setLoad(false);
-
+           
+            
         }else{
             setModalError({message: JSON.stringify(response), status: true});
         }
+       
     }
 
     const checkDataUser = async () => {
@@ -143,7 +151,6 @@ const Vender = () => {
             if(user.level == 1) {
                 navigate('/ventas');
             }
-
             //verificamos forma de pago del usuario
             verifyOptionPay(user.pay);
         }
@@ -155,6 +162,7 @@ const Vender = () => {
     }
 
     const handleSave = () => {
+        printTicket();
         setModal({message: "", status: false});
         setLastTicket({
             count: 0,
@@ -171,19 +179,22 @@ const Vender = () => {
         4: "1er Lugar |",
     }
     
-    return ( 
+    const printTicket = () => {
+        
+        window.print();
+    }
+
+    return (<>
+    {<Print data={lastTicket} animal={animal} />}
     <div className='vender'>
-        <Menu />
+        
         {load && <Portal><Loader /></Portal>}
+        
         {modal.status &&
         <div className='modal-error'>
             <div className='container'>
                 <h3>{modal.message}</h3>
                 <div className='ticket'>
-                    {/* <h4>Mega Lotto Venezuela</h4>
-                    <p># 211 | Hora: 10:27 am</p>
-                    <p>Fecha: 21/06/2022</p>
-                    <b>Números:</b> */}
                     <ul className='ul'> 
                         <li className='li'><b>Polla Millonaria</b></li>
                         <li className='li'># {lastTicket.count} | Hora: {lastTicket.hora}</li>
@@ -208,57 +219,59 @@ const Vender = () => {
                 <button className='btn' onClick={() => {setModalError(false); setLoad({message: "", status: false}); setLoad(false)}}>Cerrar</button>
             </div>
         </div>}
-
-        {/* <Menu /> */}
-        <h2>Polla Millonaria</h2>
-        <div className='container'>
-            <div className="table-selection">
-                {animal.map(animal => (
-                    <Card 
-                        key={animal.number} 
-                        data={animal} 
-                        handleChange={handleChange} 
-                        ticket={ticket}
-                    />
-                ))}
-            </div>
-            <div className="form-selection">
-                <h2>Ticket:</h2>
-                <div className='table-selected'>
-                    <ul>
-                    {ticket.map(ticket => (
-                        <li key={ticket.number}>
-                            <span>Numero: </span>
-                            <span>{ticket.number}</span>
-                            <span className='delete' onClick={() => handleDelete(ticket.number)}><img className='img-borrar' src={borrar}/></span>
-                        </li>
+            <Menu />
+            <h2>Polla Millonaria</h2>
+            <div className='container'>
+                <div className="table-selection">
+                    {animal.map(animal => (
+                        <Card 
+                            key={animal.number} 
+                            data={animal} 
+                            handleChange={handleChange} 
+                            ticket={ticket}
+                        />
                     ))}
-                    </ul>
                 </div>
-                <p className='precio'>Precio del ticket: {precio} bs</p>
-                <div className='aciertos'>
-                    {aciertos.length > 0 && (
-                        aciertos.map(acierto => (
-                            <span key={acierto._id} className='acierto'>{descriptionPremios[acierto.type]} Premio: {acierto.premio}</span>
-                        ))
-                    )}
-                </div>
-                <div className='pago'>
-                    <label>Forma de Pago: </label>
-                    <select className='form-control' onChange={(e) => setPago(e.target.value)} ref={selectInputRef}>
-                        {options.map(element => (  
-                            <option key={element.value} value={element.value}>{element.name}</option>
+                <div className="form-selection">
+                    <h2>Ticket:</h2>
+                    <div className='table-selected'>
+                        <ul>
+                        {ticket.map(ticket => (
+                            <li key={ticket.number}>
+                                <span>Numero: </span>
+                                <span>{ticket.number}</span>
+                                <span className='delete' onClick={() => handleDelete(ticket.number)}><img className='img-borrar' src={borrar}/></span>
+                            </li>
                         ))}
-                    </select>            
+                        </ul>
+                    </div>
+                    <p className='precio'>Precio del ticket: {precio} bs</p>
+                    <div className='aciertos'>
+                        {aciertos.length > 0 && (
+                            aciertos.map(acierto => (
+                                <span key={acierto._id} className='acierto'>{descriptionPremios[acierto.type]} Premio: {acierto.premio}</span>
+                            ))
+                        )}
+                    </div>
+                    <div className='pago'>
+                        <label>Forma de Pago: </label>
+                        <select className='form-control' onChange={(e) => setPago(e.target.value)} ref={selectInputRef}>
+                            {options.map(element => (  
+                                <option key={element.value} value={element.value}>{element.name}</option>
+                            ))}
+                        </select>            
+                    </div>
+                    <button 
+                        className={ticket.length < 6 ? 'btn-disabled' : undefined}
+                        disabled = {ticket.length < 6 ? true : false}
+                        onClick={() => handleClick()}
+                    >Guardar</button>
                 </div>
-                <button 
-                    className={ticket.length < 6 ? 'btn-disabled' : undefined}
-                    disabled = {ticket.length < 6 ? true : false}
-                    onClick={() => handleClick()}
-                >Guardar</button>
             </div>
-        </div>
-    </div> );
+        
+        
+        
+    </div></> );
 }
  
 export default Vender;
