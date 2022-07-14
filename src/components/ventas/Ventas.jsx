@@ -19,7 +19,7 @@ const Ventas = () => {
     const [ premios, setPremios ] = useState([]);
     const [sumaPremio, setSumaPremio ] = useState(0);
 
-    const ventasUser = [];
+    
     let sumaVentas = 0;
 
     useEffect(() => {
@@ -46,7 +46,7 @@ const Ventas = () => {
         // console.log(sumaPremio);
         // setPremios([ ...premios, dataPremios.data[0]]);
     }
-
+   
     const getVentas = async () => {
         const token = localStorage.getItem('lotto').replaceAll('"', '');
         const query = await api(`${URL}/api/v1/ventas/all`, { token, desde, hasta }, "POST");
@@ -64,9 +64,9 @@ const Ventas = () => {
     });
 
    
-
+    let ventasUser = [];
     allVentas.forEach((ventas, index) => {
-        
+  
         if(ventas.status != 1){ //no tomar los anulados "status: 1"
             if(ventasUser.length == 0){
                 ventasUser.push({ user: ventas.user.name, ventas: 0, premio: 0 });
@@ -88,8 +88,6 @@ const Ventas = () => {
 
     });
 
-    
-    
     return ( 
         <div className='ventas'>
             <Menu />
@@ -111,15 +109,16 @@ const Ventas = () => {
                 {users.length > 0 && (
                     users.map(u => (
                         <div className='vendedor'>
-                        <div className='vendedor-vendedor'>{u.user}</div>
-                        <div className='vendedor-ventas'>{ventasUser.length > 0 ? (ventasUser.filter( v => v.user == u.user)[0].ventas).toFixed(2) : 0}</div>
-                        <div className='vendedor-premios'>{ventasUser.length > 0 ? (ventasUser.filter( v => v.user == u.user)[0].premio).toFixed(2) : 0}</div>
+                        <div className='vendedor-, endedor'>{u.user}</div>
+                        {console.log()}
+                        <div className='vendedor-ventas'>{ventasUser.length > 0 ? (ventasUser.filter( v => v.user, u.user)[0].ventas).toFixed(2) : 0}</div>
+                        <div className='vendedor-premios'>{ventasUser.length > 0 ? (ventasUser.filter( v => v.user, u.user)[0].premio).toFixed(2) : 0}</div>
                         <div className='vendedor-queda'>
                         {
                             ventasUser.length > 0 
                             ?
-                            (ventasUser.filter( v => v.user == u.user)[0].ventas -
-                            ventasUser.filter( v => v.user == u.user)[0].premio).toFixed(2)
+                            (ventasUser.filter( v => v.user, u.user)[0].ventas -
+                            ventasUser.filter( v => v.user, u.user)[0].premio).toFixed(2)
                             : 0
                         }</div>
                     </div>
