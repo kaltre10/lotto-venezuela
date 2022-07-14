@@ -145,7 +145,7 @@ const Vender = () => {
         if(!dataContext.user.id){
             let user = await useGetUser();  
             if(!user.id){
-                navigate('/');
+                navigate('/login');
             }
             setDataContext({ user: { id: user.id, level: user.level, saldo: user.saldo, pay: user.pay}});
             if(user.level == 1) {

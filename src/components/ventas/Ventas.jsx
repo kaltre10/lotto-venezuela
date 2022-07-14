@@ -26,7 +26,7 @@ const Ventas = () => {
         ( async() => {
             const checkUser = await useGetUser();
             if(!checkUser.id){
-                navigate('/');
+                navigate('/login');
             }
             getVentas();
             getPremios();

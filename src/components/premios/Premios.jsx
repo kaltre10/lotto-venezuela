@@ -22,7 +22,7 @@ const Premios = () => {
         ( async() => {
             const checkUser = await useGetUser();
             if(!checkUser.id){
-                navigate('/');
+                navigate('/login');
             }
             getPremios();
             getPrecio();
