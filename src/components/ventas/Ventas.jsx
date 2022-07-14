@@ -66,7 +66,6 @@ const Ventas = () => {
    
     let ventasUser = [];
     allVentas.forEach((ventas, index) => {
-  
         if(ventas.status != 1){ //no tomar los anulados "status: 1"
             if(ventasUser.length == 0){
                 ventasUser.push({ user: ventas.user.name, ventas: 0, premio: 0 });
@@ -110,15 +109,15 @@ const Ventas = () => {
                     users.map(u => (
                         <div className='vendedor'>
                         <div className='vendedor-, endedor'>{u.user}</div>
-                        {console.log()}
-                        <div className='vendedor-ventas'>{ventasUser.length > 0 ? (ventasUser.filter( v => v.user, u.user)[0].ventas).toFixed(2) : 0}</div>
-                        <div className='vendedor-premios'>{ventasUser.length > 0 ? (ventasUser.filter( v => v.user, u.user)[0].premio).toFixed(2) : 0}</div>
+                       {console.log(ventasUser.filter( v => v.user == u.user)[0] || 0)}
+                        <div className='vendedor-ventas'>{ventasUser.filter( v => v.user == u.user)[0] ? (ventasUser.filter( v => {if(v.user == u.user) return v})[0].ventas).toFixed(2) : 0}</div>
+                        <div className='vendedor-premios'>{ventasUser.filter( v => v.user == u.user)[0] ? (ventasUser.filter( v => {if(v.user == u.user) return v})[0].premio).toFixed(2) : 0}</div>
                         <div className='vendedor-queda'>
                         {
-                            ventasUser.length > 0 
+                            ventasUser.filter( v => v.user == u.user)[0] 
                             ?
-                            (ventasUser.filter( v => v.user, u.user)[0].ventas -
-                            ventasUser.filter( v => v.user, u.user)[0].premio).toFixed(2)
+                            (ventasUser.filter( v => {if(v.user == u.user) return v})[0].ventas -
+                            ventasUser.filter( v => {if(v.user == u.user) return v})[0].premio).toFixed(2)
                             : 0
                         }</div>
                     </div>
