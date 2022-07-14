@@ -25,7 +25,7 @@ const Jugadas = () => {
         const query = await fetch(`${URL}/api/v1/ventas/${date}`);
         const data = await query.json();
         setLoad(false);
-        setJugadas(data.data);
+        setJugadas(data.data.filter( j => j.status != 1));
     }
 
     const getTime = (date) => {
@@ -67,15 +67,15 @@ const Jugadas = () => {
                     <div className='jugada-head-item'>ACIERTOS</div>
                 </div>
                 {jugadas.length > 0 && (
-                    jugadas.map( (j, index) => (
+                    jugadas.map( (j, index) => (<>
                         <div key={j._id} className='jugada-item'>
                              <div className='id'>#ID: </div><div className='jugada-head-item id-item'>{index+1} - ID {j.count}</div>
                             <div className='hora'>HORA: </div><div className='jugada-head-item hora-item'>{getTime(j.createdAt)}</div>
                             <div className='user'>USUARIO: </div><div className='jugada-head-item user-item'>{j.user.user}</div>
                             <div className='jugada-i'>JUGADAS: </div><div className='jugada-head-item jugada-it'>{j.numbers.map( n => (`${n.number} `))}</div>
                             <div className='aciertos'>ACIERTOS: </div><div className='jugada-head-item aciertos-item'>{j.aciertos}</div>
-                        </div>        
-                    ))
+                        </div>
+                    </>))
                 )}
             </div>
         </div>

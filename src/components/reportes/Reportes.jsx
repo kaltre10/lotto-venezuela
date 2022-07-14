@@ -35,7 +35,7 @@ const Reportes = () => {
         const token = localStorage.getItem('lotto').replaceAll('"', '');
         const query = await api(`${URL}/api/v1/ventas/ticket-user`, { token, date: day, status }, "POST");
         const data = await query.json();
-        setTickets([data]);
+        setTickets(data.data.filter( d => d.status != 1));
         setLoad(false);
     }
 
@@ -57,9 +57,9 @@ const Reportes = () => {
                 </div>
                 <div className='table'>
                     <div className='ticket-container'>
-                        {tickets[0] &&
-                            tickets[0].data.map( t => (
-                                <Ticket key={t._id} data={t} />
+                        {tickets &&
+                            tickets.map( t => (
+                                <Ticket key={t.count} data={t} />
                             ))
                         }
                     </div>
