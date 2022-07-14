@@ -27,7 +27,7 @@ const DataUserContext = props => {
                     pay: user.pay
                  }})
             }else{
-                navigate('login');
+                navigate('/');
             }
         })();
     }, []);

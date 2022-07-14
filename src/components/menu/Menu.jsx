@@ -14,7 +14,7 @@ const Menu = () => {
     const handleClose = () => {
         setDataContext({ user: {id: null, level: 0, saldo: 0, pay: 0}})
         localStorage.removeItem('lotto')
-        navigate('/login');
+        navigate('/');
     }
 
     return ( 

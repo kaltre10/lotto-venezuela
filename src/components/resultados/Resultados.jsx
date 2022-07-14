@@ -32,7 +32,7 @@ const Resultados = () => {
         ( async() => {
             const checkUser = await useGetUser();
             if(!checkUser.id){
-                navigate('/login');
+                navigate('/');
             }
             getResultados();
         })();

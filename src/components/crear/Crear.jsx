@@ -34,8 +34,8 @@ const Crear = () => {
     useEffect(() => {
         ( async() => {
             const checkUser = await useGetUser();
-            if(!checkUser.id) navigate('/login');
-            if(checkUser.level !== 1) navigate('/login');
+            if(!checkUser.id) navigate('/');
+            if(checkUser.level !== 1) navigate('/');
             getUsers();
         })();
     }, []);

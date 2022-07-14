@@ -30,7 +30,7 @@ function App() {
           <Route path="/pagar" element={<Pagar/>} />
           <Route path="/premios" element={<Premios/>} />
           <Route path="/jugadas" element={<Jugadas/>} />
-          <Route path="/login" element={<Login/>} />
+          {/* <Route path="/login" element={<Login/>} /> */}
         </Routes>
       </DataUserContext>
     </div>
