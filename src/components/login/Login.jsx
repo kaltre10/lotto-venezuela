@@ -3,6 +3,7 @@ import api from '../../services/api';
 import Portal from '../portal/Portal';
 import Loader from '../loader/Loader';
 import logo from '../../img/logo-polla.png';
+import banner from '../../img/banner.png';
 import { useNavigate } from "react-router-dom";
 import './login.css';
 
@@ -63,7 +64,9 @@ const Login = () => {
             )}
 
             <div className='container-login'>
-                
+                <div className='container-img'>
+                    <img className='banner-img' src={banner} />
+                </div>
                 <div className='container'>
                     <form className='form' onSubmit={e => handleSubmit(e)}>
                         <h2><img className='picture-img' src={logo} alt='Login Polla Millonaria' /></h2>
