@@ -97,6 +97,24 @@
     border: none;
 }
 
+.login .container-whatsapp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 5px;
+    text-decoration: none;
+}
+.login .container-whatsapp h3{
+    color: #ffffffe6;
+    font-weight: 400;
+}
+
+.login .whatsapp{
+    width: 100%;
+    max-width: 30px;
+    max-height: 30px;
+}
+
 @media (max-width: 850px){
 
     .login .container-login{

@@ -4,6 +4,7 @@ import Portal from '../portal/Portal';
 import Loader from '../loader/Loader';
 import logo from '../../img/logo-polla.png';
 import banner from '../../img/banner.png';
+import whatsapp from '../../img/whatsapp.png';
 import { useNavigate } from "react-router-dom";
 import './login.css';
 
@@ -75,6 +76,9 @@ const Login = () => {
                         <label>Contraseña:</label>
                         <input className='input' type="password" onChange={e => handleChange(e)} name="pass" autoComplete='off' required/>
                         <button className='btn'>ENTRAR</button>
+                            <a href='https://api.whatsapp.com/send?phone=584241419866'
+                            target="_blank" className='container-whatsapp'><img className='whatsapp' src={whatsapp}/>
+                            <h3 style={{textAlign: 'center'}}>0424-1419866</h3></a>
                     </form>
                 </div>  
             </div>
