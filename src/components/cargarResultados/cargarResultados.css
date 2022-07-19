@@ -10,3 +10,15 @@
 .cargar-resultados option{
     padding: 10px;
 }
+
+.cargar-resultados .anular{
+    width: 20px;
+    padding: 7px;
+    margin: 0 auto;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.cargar-resultados .anular:hover{
+    background-color: aquamarine;
+}

@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import Menu from '../menu/Menu';
 import './cargarResultados.css';
 import CardResultados from '../cardResultados/CardResultados';
@@ -120,7 +120,7 @@ const CargarResultados = () => {
             </div>
             <div className='container'>
                 {resultados.map( r => (
-                    <CardResultados key={r.number} data={r}/>
+                    <CardResultados key={r.number} data={r} getResultados={getResultados}/>
                 ))}
             </div>
         </div>
