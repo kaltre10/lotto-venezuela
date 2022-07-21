@@ -12,6 +12,7 @@ const CargarResultados = () => {
 
     const navigate = useNavigate();
     const date = new Date();
+    const [userId, setUserId] = useState(null);
     const [modal, setModal] = useState(false);
     const [resultado, setResultado] = useState({
         number: '',
@@ -46,6 +47,7 @@ const CargarResultados = () => {
             const checkUser = await useGetUser();
             if(!checkUser.id) navigate('/login');
             if(checkUser.level !== 1) navigate('/login');
+            setUserId(checkUser.level)
             getResultados();
         })();
     }, []);
@@ -120,7 +122,7 @@ const CargarResultados = () => {
             </div>
             <div className='container'>
                 {resultados.map( r => (
-                    <CardResultados key={r.number} data={r} getResultados={getResultados}/>
+                    <CardResultados key={r.number} data={r} getResultados={getResultados} userId={userId}/>
                 ))}
             </div>
         </div>

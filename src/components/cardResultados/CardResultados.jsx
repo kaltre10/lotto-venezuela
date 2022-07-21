@@ -3,7 +3,7 @@ import Portal from '../portal/Portal';
 import api from '../../services/api';
 import './cardResultados.css';
 
-const CardResultados = ({ data, getResultados }) => {
+const CardResultados = ({ data, getResultados, userId }) => {
 
     const [ modal, setModal ] = useState(false);
     const [ modalError, setModalError ] = useState({
@@ -37,7 +37,7 @@ const CardResultados = ({ data, getResultados }) => {
         //render resultados
         getResultados()
     }
-
+    
     return (<>
         {  modal && (
                 <Portal>
@@ -68,7 +68,10 @@ const CardResultados = ({ data, getResultados }) => {
         }
         <div className="card-resultados">
             <span className='number'>{data.resultado}</span>
-            <p className="time">{data.time}</p><span className='anular' onClick={() => setModal(true)}>⛏️</span>
+            <p className="time">{data.time}</p>
+            {(userId == 1) && 
+                <span className='anular' onClick={() => setModal(true)}>⛏️</span>
+            }
         </div>
     </>);
 }
