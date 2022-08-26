@@ -52,7 +52,7 @@ const Jugadas = () => {
             <Menu />
             <h2>Jugadas</h2>
             <div className='premios'>
-                {premios.map( p => (
+                {premios.map(p => (
                     <div className='premio-item' key={p._id}>{descriptionPremios[p.type]} Premio: {p.premio} Bs.</div>
                 ))}
             </div>
@@ -68,10 +68,11 @@ const Jugadas = () => {
                 </div>
                 {jugadas.length > 0 && (
                     jugadas.map( (j, index) => (<>
+                    {console.log(j)}
                         <div key={j._id} className='jugada-item'>
                              <div className='id'>#ID: </div><div className='jugada-head-item id-item'>{index+1} - ID {j.count}</div>
                             <div className='hora'>HORA: </div><div className='jugada-head-item hora-item'>{getTime(j.createdAt)}</div>
-                            <div className='user'>USUARIO: </div><div className='jugada-head-item user-item'>{j.user.user}</div>
+                            <div className='user'>USUARIO: </div><div className='jugada-head-item user-item'>{j.user && j.user.user}</div>
                             <div className='jugada-i'>JUGADAS: </div><div className='jugada-head-item jugada-it'>{j.numbers.map( n => (`${n.number} `))}</div>
                             <div className='aciertos'>ACIERTOS: </div><div className='jugada-head-item aciertos-item'>{j.aciertos}</div>
                         </div>
