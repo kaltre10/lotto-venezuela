@@ -79,7 +79,7 @@ const Vender = () => {
     }
 
     const handleChange = (data) => {
-        if(ticket.length < 6) setTicket([ 
+        if(ticket.length < 5) setTicket([ 
             ...ticket, { 
                         number: animal.filter(a => a.number == data)[0].number,
                         name: animal.filter(a => a.number == data)[0].name
@@ -205,7 +205,7 @@ const Vender = () => {
                         <li className='li'># {lastTicket.numbers[2].number} | {animal.filter( a => a.number == lastTicket.numbers[2].number)[0].name}</li>
                         <li className='li'># {lastTicket.numbers[3].number} | {animal.filter( a => a.number == lastTicket.numbers[3].number)[0].name}</li>
                         <li className='li'># {lastTicket.numbers[4].number} | {animal.filter( a => a.number == lastTicket.numbers[4].number)[0].name}</li>
-                        <li className='li'># {lastTicket.numbers[5].number} | {animal.filter( a => a.number == lastTicket.numbers[5].number)[0].name}</li>
+                        {/* <li className='li'># {lastTicket.numbers[5].number} | {animal.filter( a => a.number == lastTicket.numbers[5].number)[0].name}</li> */}
                     </ul>
                 </div>
                 <button className='btn' onClick={() => handleSave()}>CONTINUAR</button>
@@ -262,8 +262,8 @@ const Vender = () => {
                         </select>            
                     </div>
                     <button 
-                        className={ticket.length < 6 ? 'btn-disabled' : undefined}
-                        disabled = {ticket.length < 6 ? true : false}
+                        className={ticket.length < 5 ? 'btn-disabled' : undefined}
+                        disabled = {ticket.length < 5 ? true : false}
                         onClick={() => handleClick()}
                     >Guardar</button>
                 </div>

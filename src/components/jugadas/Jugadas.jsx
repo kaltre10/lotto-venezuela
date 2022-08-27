@@ -68,7 +68,6 @@ const Jugadas = () => {
                 </div>
                 {jugadas.length > 0 && (
                     jugadas.map( (j, index) => (<>
-                    {console.log(j)}
                         <div key={j._id} className='jugada-item'>
                              <div className='id'>#ID: </div><div className='jugada-head-item id-item'>{index+1} - ID {j.count}</div>
                             <div className='hora'>HORA: </div><div className='jugada-head-item hora-item'>{getTime(j.createdAt)}</div>
