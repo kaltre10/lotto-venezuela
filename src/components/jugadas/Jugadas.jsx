@@ -24,6 +24,7 @@ const Jugadas = () => {
         setLoad(true);
         const query = await fetch(`${URL}/api/v1/ventas/${date}`);
         const data = await query.json();
+        console.log(data)
         setLoad(false);
         setJugadas(data.data.filter( j => j.status != 1));
     }

@@ -3,7 +3,7 @@ import api from '../../services/api';
 import Portal from '../portal/Portal';
 import Loader from '../loader/Loader';
 import logo from '../../img/logo-polla.png';
-import banner from '../../img/banner.png';
+import banner from '../../img/banner.webp';
 import whatsapp from '../../img/whatsapp.png';
 import { useNavigate } from "react-router-dom";
 import './login.css';
