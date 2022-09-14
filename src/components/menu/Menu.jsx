@@ -42,7 +42,7 @@ const Menu = () => {
                     <li><NavLink to='/jugadas'>Jugadas</NavLink></li>
                     <li className='container-saldo'>
                         <span className='saldo'>
-                            <img className='img' src={bolsa}/> {dataContext.user.saldo} Bs
+                            <img className='img' src={bolsa}/> {(dataContext.user.saldo).toFixed(2)} Bs
                         </span>
                         <a href='#' onClick={() => handleClose()}>Cerrar</a>
                     </li>
