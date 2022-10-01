@@ -11,6 +11,7 @@ const Jugadas = () => {
     const URL = import.meta.env.VITE_APP_URL;
     const day = new Date();
     const [ date, setDay ] = useState(`${String(day.getFullYear())}-${String(day.getMonth() + 1).padStart(2, '0')}-${String(day.getDate()).padStart(2, '0')}`);
+    const [ desde, setDesde ] = useState(`${String(day.getFullYear())}-${String(day.getMonth() + 1).padStart(2, '0')}-${String(day.getDate()).padStart(2, '0')}`);
     const [load, setLoad] = useState(true);
     const [ jugadas, setJugadas] = useState([]);
     const [ premios, setPremios] = useState([]);
@@ -22,9 +23,8 @@ const Jugadas = () => {
 
     const getJugadas = async () => {
         setLoad(true);
-        const query = await fetch(`${URL}/api/v1/ventas/${date}`);
+        const query = await fetch(`${URL}/api/v1/ventas/${desde}/${date}`);
         const data = await query.json();
-        console.log(data)
         setLoad(false);
         setJugadas(data.data.filter( j => j.status != 1));
     }
@@ -41,7 +41,7 @@ const Jugadas = () => {
     }
     
     const descriptionPremios = {
-        1: "4to Lugar |",
+        // 1: "4to Lugar |",
         2: "3er Lugar |",
         3: "2do Lugar |",
         4: "1er Lugar |",
@@ -57,7 +57,9 @@ const Jugadas = () => {
                     <div className='premio-item' key={p._id}>{descriptionPremios[p.type]} Premio: {p.premio} Bs.</div>
                 ))}
             </div>
-            <div><input className='form-control' type="date" value={date} onChange={e => setDay(e.target.value)} />
+            <div>
+                <input className='form-control' type="date" value={desde} onChange={e => setDesde(e.target.value)} />
+                <input className='form-control' type="date" value={date} onChange={e => setDay(e.target.value)} />
             <button className='form-control' onClick={() => getJugadas()}>Consultar</button></div>
             <div className='jugada'>
                 <div className='jugada-head'>

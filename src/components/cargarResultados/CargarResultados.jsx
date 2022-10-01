@@ -19,6 +19,9 @@ const CargarResultados = () => {
         resultado: '',
         date: `${String(date.getFullYear())}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
     });
+
+    const [ day, setDay ] = useState(`${String(date.getFullYear())}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`);
+
     const URL = import.meta.env.VITE_APP_URL;
 
     const handleInput = e => {
@@ -101,6 +104,8 @@ const CargarResultados = () => {
             <Menu />
             <h2>Cargar Resultados</h2>
             <div>
+                <label>Fecha:</label>
+                    <input name='date' className='form-control' type="date" value={day} onChange={e => {setDay(e.target.value); handleInput(e);}} />
                 <label>Hora:</label>
                 <select name='number' onClick={e => handleInput(e)}>
                     <option className='option' value=""> - seleccione - </option>
