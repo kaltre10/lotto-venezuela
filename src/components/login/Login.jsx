@@ -48,6 +48,8 @@ const Login = () => {
         setError({ message: '', status: false });
     }
 
+    const date = new Date();
+
     return ( 
         <div className='login'>
             {modal && (
@@ -69,7 +71,11 @@ const Login = () => {
                     <img className='banner-img' src={banner} />
                 </div>
                 <div className='container'>
-                    <form className='form' onSubmit={e => handleSubmit(e)}>
+                    <form style={{ position: "relative"}} className='form' onSubmit={e => handleSubmit(e)}>
+                        <p style={{
+                            position: "absolute",
+                            top: "1px"
+                        }}>Hora: {String(date.getHours()).padStart(2, '0')}:{String(date.getMinutes()).padStart(2, '0')}</p>
                         <h2><img className='picture-img' src={logo} alt='Login Polla Millonaria' /></h2>
                         <label>Nombre:</label>
                         <input className='input' type="text" onChange={e => handleChange(e)} name="user" autoComplete='off' required/>
