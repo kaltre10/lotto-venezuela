@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import api from '../../services/api';
 import Portal from '../portal/Portal';
 import Loader from '../loader/Loader';
@@ -20,6 +20,11 @@ const Login = () => {
 
     const [modal, setModal] = useState(false);
     const [error, setError] = useState({ message: '', status: false });
+    const [time, setTime] = useState({hours: 0, minutes: 0, seconds: 0});
+
+    useEffect(() => {
+        getDate()
+    }, []);
 
     const handleChange = e => {
         setData({
@@ -48,8 +53,26 @@ const Login = () => {
         setError({ message: '', status: false });
     }
 
-    const date = new Date();
+    const getDate = async () => {
+        const query = await ( await fetch('http://worldtimeapi.org/api/timezone/America/Lima') ) .json();
+        const date = new Date(query.datetime);
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        let seconds = date.getSeconds();
+        setTime({hours, minutes, seconds})
+       
+        const id = setInterval( async () => {
+            if(parseInt(seconds) === 58) {
+                clearInterval(id);
+                getDate();
+            }
 
+            seconds++;
+            seconds = String(seconds).padStart(2, '0');
+            setTime({ hours, minutes, seconds });
+        }, 1000);
+    }
+   
     return ( 
         <div className='login'>
             {modal && (
@@ -75,7 +98,7 @@ const Login = () => {
                         <p style={{
                             position: "absolute",
                             top: "1px"
-                        }}>Hora: {String(date.getHours()).padStart(2, '0')}:{String(date.getMinutes()).padStart(2, '0')}</p>
+                        }}>Hora: {time.hours}:{time.minutes}</p>
                         <h2><img className='picture-img' src={logo} alt='Login Polla Millonaria' /></h2>
                         <label>Nombre:</label>
                         <input className='input' type="text" onChange={e => handleChange(e)} name="user" autoComplete='off' required/>
