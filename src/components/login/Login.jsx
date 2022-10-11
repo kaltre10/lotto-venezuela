@@ -54,11 +54,12 @@ const Login = () => {
     }
 
     const getDate = async () => {
-        const query = await ( await fetch('http://worldtimeapi.org/api/timezone/America/Lima') ) .json();
+        const query = await ( await fetch('http://worldtimeapi.org/api/timezone/America/Caracas') ) .json();
         const date = new Date(query.datetime);
-        const hours = String(date.getHours()).padStart(2, '0');
+        const hours = String(query.datetime.split("T")[1].slice(0, 2)).padStart(2, '0');
         const minutes = String(date.getMinutes()).padStart(2, '0');
         let seconds = date.getSeconds();
+        // console.log(query.datetime.split("T")[1].slice(0, 2))
         setTime({hours, minutes, seconds})
        
         const id = setInterval( async () => {
