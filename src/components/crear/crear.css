@@ -1,81 +1,81 @@
 .crear .container{
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+    max-width: 1240px;
+    margin: 0 auto;
 }
 
 .crear .form{
-    width: 400px;
+    width: min(100%, 420px);
     display: flex;
     flex-direction: column;
-    gap: 10px 0;
+    gap: 12px;
+    padding: 26px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 26px;
+    background: linear-gradient(180deg, rgba(15, 28, 55, 0.9), rgba(10, 20, 39, 0.92));
+    box-shadow: var(--shadow-md);
+    text-align: left;
 }
 
 .crear .input{
-    padding: 10px;
+    padding: 0.95rem 1rem;
 }
 
 .crear .list{
-    width: 400px;
+    width: min(100%, 640px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 .crear .btn{
-    cursor: pointer;
+    width: 100%;
 }
 
 .crear .list-item{
-    padding: 15px;
+    padding: 18px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(15, 28, 55, 0.9), rgba(10, 20, 39, 0.92));
+    box-shadow: var(--shadow-md);
+    text-align: left;
 }
 
 .crear .delete, .crear .update{
     cursor: pointer;
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
     display: grid;
     place-items: center;
     margin: 0;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .crear .img-update, .crear .img-borrar{
-    width: 40px;
+    width: 28px;
 }   
 
 
 .crear .delete:hover, .crear .update:hover{
-    background-color: aquamarine;
+    background-color: rgba(255, 196, 79, 0.14);
 }
 
 .select{
-    background-color: #171826 !important;
+    background-color: rgba(255, 255, 255, 0.04) !important;
 }
 
-.modal-card {
-    width: 300px;
-    display: grid;
-    text-align: center;
-    padding: 20px;
-    border-radius: 25px;
-    background-color: #34495e;
-  }
-
-.modal-card .form-control{
-    margin: 10px auto;
-    width: 200px;
-    background-color: transparent;
-    /* border: none; */
-    padding: 5px;
-    border-radius: 15px;
-    font-size: 25px;
-    color: white;
-}
-
-.modal-btn {
-    cursor: pointer;
-    width: 100px;
-    padding: 2px;
-    border-radius: 8px;
-    border: none;
-    margin: 0 2px;
+@media (max-width: 720px){
+    .crear .list-item{
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
 }

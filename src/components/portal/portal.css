@@ -4,9 +4,11 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.8);
+    padding: 24px;
+    background: rgba(3, 10, 20, 0.72);
+    backdrop-filter: blur(12px);
     color: white;
-    position: absolute;
-    top: 0;
     position: fixed;
+    inset: 0;
+    z-index: 1000;
 }

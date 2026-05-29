@@ -1,9 +1,20 @@
 .ticket{
-    background-color: #1b1e2c;
-    padding: 20px;
-    border-radius: 25px;
-    gap: 20px;
+    width: min(100%, 980px);
+    padding: 22px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 26px;
+    background: linear-gradient(180deg, rgba(15, 28, 55, 0.9), rgba(10, 20, 39, 0.92));
+    box-shadow: var(--shadow-md);
+    gap: 16px 24px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+}
+
+@media (max-width: 720px){
+    .ticket{
+        padding: 18px;
+        border-radius: 22px;
+        text-align: left;
+    }
 }

@@ -23,7 +23,28 @@ const Login = () => {
     const [time, setTime] = useState({hours: 0, minutes: 0, seconds: 0});
 
     useEffect(() => {
-        getDate()
+        const updateTime = () => {
+            const formatter = new Intl.DateTimeFormat('es-VE', {
+                timeZone: 'America/Caracas',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            const parts = formatter.formatToParts(new Date());
+            const getPart = (type) => parts.find(part => part.type === type)?.value || '00';
+
+            setTime({
+                hours: getPart('hour'),
+                minutes: getPart('minute'),
+                seconds: getPart('second')
+            });
+        };
+
+        updateTime();
+        const intervalId = setInterval(updateTime, 1000);
+
+        return () => clearInterval(intervalId);
     }, []);
 
     const handleChange = e => {
@@ -53,27 +74,6 @@ const Login = () => {
         setError({ message: '', status: false });
     }
 
-    const getDate = async () => {
-        const query = await ( await fetch('http://worldtimeapi.org/api/timezone/America/Caracas') ) .json();
-        const date = new Date(query.datetime);
-        const hours = String(query.datetime.split("T")[1].slice(0, 2)).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        let seconds = date.getSeconds();
-        // console.log(query.datetime.split("T")[1].slice(0, 2))
-        setTime({hours, minutes, seconds})
-       
-        const id = setInterval( async () => {
-            if(parseInt(seconds) === 58) {
-                clearInterval(id);
-                getDate();
-            }
-
-            seconds++;
-            seconds = String(seconds).padStart(2, '0');
-            setTime({ hours, minutes, seconds });
-        }, 1000);
-    }
-   
     return ( 
         <div className='login'>
             {modal && (
@@ -107,7 +107,7 @@ const Login = () => {
                         <input className='input' type="password" onChange={e => handleChange(e)} name="pass" autoComplete='off' required/>
                         <button className='btn'>ENTRAR</button>
                             <a href='https://api.whatsapp.com/send?phone=584241419866'
-                            target="_blank" className='container-whatsapp'><img className='whatsapp' src={whatsapp}/>
+                            target="_blank" rel="noreferrer" className='container-whatsapp'><img className='whatsapp' src={whatsapp}/>
                             <h3 style={{textAlign: 'center'}}>0424-1419866</h3></a>
                     </form>
                 </div>  

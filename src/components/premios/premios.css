@@ -2,25 +2,21 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* align-items: center; */
-    gap: 0 20px;
-    /* height: 60vh; */
+    gap: 20px;
 }
 
 .premios .card{
     min-width: 300px;
-    background-color: #1b1e2c;
-    height: auto;
-    margin: 10px;
+    max-width: 360px;
+    padding: 24px;
+    background: linear-gradient(180deg, rgba(15, 28, 55, 0.9), rgba(10, 20, 39, 0.92));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 26px;
+    box-shadow: var(--shadow-md);
+    text-align: left;
 }
 
-.modal-card .form-control{
-    margin: 10px auto;
-    width: 200px;
-    background-color: transparent;
-    /* border: none; */
-    padding: 5px;
-    border-radius: 15px;
-    font-size: 25px;
-    color: white;
+.premios .card p{
+    margin: 10px 0 20px;
+    color: var(--text-muted);
 }
